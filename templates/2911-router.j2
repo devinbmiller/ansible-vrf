@@ -6,12 +6,17 @@ vrf definition {{ vrf_name }}
 !
 !
 {% if dual_routers == True %}
-interface {{ intra_router_interface }}.{{ intra_router_vrf_tag }}
+!
+interface {{ intra_router_interface }}.{{ vrf_vlan }}
  !
- encapsulation dot1Q {{ intra_router_vrf_tag }}
+ description {{ vrf_name }} INTRA-ROUTER L3 TRANSPORT to {{ peer_router }}
+ encapsulation dot1Q {{ vrf_vlan }}
  vrf forwarding {{ vrf_name }}
+ ip address {{ intra_router_ip }} {{ intra_router_mask }}
+!
 {% endif %}
-
+!
+!
 # This calls OSPF.j2 template
 {% block OSPF %}
 {% endblock %}
