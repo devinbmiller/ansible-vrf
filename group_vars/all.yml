@@ -15,6 +15,7 @@ fhrp_group: "780"
 fhrp_gw_ip: "172.16.0.1" 
 
 # OSPF Variables
-vrf_ospf_area: "17423"
-ospf_network: "172.16.0.0"
-ospf_wildcard_mask: "0.0.7.255"
+ospf:
+  vrf_area: "17423"
+  network: "172.16.0.0"
+  wildcard_mask: "0.0.7.255"
