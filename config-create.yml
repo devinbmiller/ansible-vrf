@@ -1,0 +1,14 @@
+---
+
+- name: Build 2911 Router VRF
+  hosts: 2911-router
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+  - name: BUILD CONFIGURATION
+    template:
+      src=templates/2911-router.j2
+      dest=configs/{{ inventory_hostname }}.conf
+    tags: build-2911
