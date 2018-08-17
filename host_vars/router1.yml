@@ -5,3 +5,6 @@
 peer_router: "router2"
 intra_router_ip: "192.168.1.1"
 intra_router_mask: "255.255.255.250"        
+
+vrf_router_ip: "172.16.0.2"
+vrf_router_mask: "255.255.255.0"

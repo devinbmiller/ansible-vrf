@@ -18,7 +18,7 @@ interface {{ intra_router_interface }}.{{ vrf_vlan }}
 !
 !
 router ospf {{vrf_vlan}} vrf {{ vrf_name }}
- router-id 
+ router-id {{ vrf_router_ip }} 
  auto-cost reference-bandwidth 100000
  capability vrf-lite
- network 10.179.232.0 0.0.7.255 area {{ vrf_ospf_area }}
+ network {{ ospf_network }} {{ ospf_wildcard_mask }} area {{ vrf_ospf_area }}

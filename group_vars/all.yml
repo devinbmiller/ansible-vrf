@@ -3,8 +3,13 @@
 
 # Are there two routers?
 dual_routers: True
+intra_router_interface: "GigabitEthernet0/2"
 
+# Basic VRF variables
 vrf_name: "guestVRF"
 vrf_vlan: "1740"
 
-intra_router_interface: "GigabitEthernet0/2"
+# OSPF Variables
+vrf_ospf_area: "17423"
+ospf_network: "172.16.0.0"
+ospf_wildcard_mask: "0.0.7.255"
