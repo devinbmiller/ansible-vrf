@@ -34,6 +34,8 @@ router ospf {{vrf_vlan}} vrf {{ vrf_name }}
  router-id {{ vrf_router_ip }} 
  auto-cost reference-bandwidth 100000
  capability vrf-lite
- network {{ ospf.network }} {{ ospf.wildcard_mask }} area {{ ospf.vrf_area }}
+{% for item in ospf.networks %}
+ network {{ item.network }} {{ item.wildcard_mask }} area {{ item.area }}
+{% endfor %}
 !
 !
