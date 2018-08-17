@@ -3,7 +3,7 @@
 
 vrf_name: "testVRF"
 
-dual_routers: "False"
+dual_routers: True
 
 intra_router_interface: "GigabitEthernet0/2"
 intra_router_vrf_tag: "1780"
