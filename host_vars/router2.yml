@@ -1,0 +1,7 @@
+---
+# This file should contain variables unique to router2
+
+# These are used in a two router configuration
+peer_router: "router1"
+intra_router_ip: "192.168.1.2"
+intra_router_mask: "255.255.255.250"        

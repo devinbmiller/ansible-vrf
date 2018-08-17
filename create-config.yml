@@ -1,7 +1,7 @@
 ---
 
 - name: Build 2911 Router VRF
-  hosts: 2911-router
+  hosts: ios 
   connection: local
   gather_facts: no
 
