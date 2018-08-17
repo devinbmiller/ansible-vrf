@@ -5,4 +5,9 @@ vrf definition {{ vrf_name }}
 !
 !
 !
-
+{% if dual_routers == True %}}
+interface {{ intra_router_interface }}.{{ intra_router_vrf_tag }}
+ !
+ encapsulation dot1Q {{ intra_router_vrf_tag }}
+ vrf forwarding {{ vrf_name }}
+{% endif %}
