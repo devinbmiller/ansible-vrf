@@ -1,10 +1,13 @@
 ---
 # This file should contain variables unique to router1
 
+router_name: "BLDG-2911-1"
+
 # These are used in a two router configuration
 peer_router: "router2"
 intra_router_ip: "192.168.1.1"
 intra_router_mask: "255.255.255.250"        
 
+# This is for the router's LAN interface
 vrf_router_ip: "172.16.0.2"
 vrf_router_mask: "255.255.255.0"

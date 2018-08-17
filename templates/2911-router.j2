@@ -9,16 +9,14 @@ vrf definition {{ vrf_name }}
 !
 interface {{ intra_router_interface }}.{{ vrf_vlan }}
  !
- description {{ vrf_name }} INTRA-ROUTER L3 TRANSPORT to {{ peer_router }}
+ description {{ vrf_name }} INTRA-ROUTER L3 TRANSPORT TO {{ peer_router }}
  encapsulation dot1Q {{ vrf_vlan }}
- vrf forwarding {{ vrf_name }}`
+ vrf forwarding {{ vrf_name }}
  ip address {{ intra_router_ip }} {{ intra_router_mask }}
-!
-{% endif %}
 !
 !
 interface {{ router_lan_interface }}.{{ vrf_vlan }}
- description {{ inventory_hostname }} LAN {{ vrf_name }}
+ description L3 LAN INTERFACE {{ vrf_name }}
  encapsulation dot1Q {{ vrf_vlan }}
  vrf forwarding {{ vrf_name }}
  ip address {{ vrf_router_ip }} {{ vrf_router_mask }}
@@ -28,6 +26,8 @@ interface {{ router_lan_interface }}.{{ vrf_vlan }}
  ip pim sparse-mode
  glbp {{ fhrp_group }} ip {{ fhrp_gw_ip }}
  glbp {{ fhrp_group }} timers 1 3
+!
+{% endif %}
 !
 !
 router ospf {{vrf_vlan}} vrf {{ vrf_name }}
