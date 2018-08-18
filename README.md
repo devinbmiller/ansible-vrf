@@ -1,1 +1,4 @@
-## Placeholder for details on this project ##
+## VRF Builder ##
+
+This playbook currently supports builing VRFs for:
+* Cisco 2911 Router
