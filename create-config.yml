@@ -1,13 +1,13 @@
 ---
 
-- name: Build 2911 Router VRF
+- name: Build VRF Configurations
   hosts: ios 
   connection: local
   gather_facts: no
 
   tasks:
 
-  - name: BUILD CONFIGURATION
+  - name: BUILD 2911 Router Configuration
     template:
       src=templates/2911-router.j2
       dest=configs/{{ router_name }}.conf
