@@ -1,6 +1,4 @@
-!
 interface {{ intra_router_interface }}.{{ vrf_vlan }}
- !
  description {{ vrf_name }} INTRA-ROUTER L3 TRANSPORT TO {{ peer_router }}
  encapsulation dot1Q {{ vrf_vlan }}
  vrf forwarding {{ vrf_name }}
@@ -18,4 +16,17 @@ interface {{ router_lan_interface }}.{{ vrf_vlan }}
  ip pim sparse-mode
  glbp {{ fhrp_group }} ip {{ fhrp_gw_ip }}
  glbp {{ fhrp_group }} timers 1 3
- !
+!
+!
+{% if inventory_hostname == "router1" %}
+interface {{ transport1_interface }}.{{ transport1_vlan }}
+ description L3 TRANSPORT INTERFACE TO MAN {{ vrf_name }}
+ encapsulation dot1Q {{ transport1_vlan }}
+ vrf forwarding {{ vrf_name }}
+ ip address {{ transport1_ip }} {{ transport1_mask }}
+{% endif %}
+!
+{% if inventory_hostname == "router2" %}
+TESTESTESTEST
+{{ transport2_ip }}
+{% endif %}

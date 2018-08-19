@@ -1,14 +1,10 @@
 vrf definition {{ vrf_name }}
- !
  address-family ipv4
  exit-address-family
 !
 !
-!
 {% if dual_routers == True %}
-
 {% include "2911-dual.j2" %}
-
 {% endif %}
 !
 !
@@ -19,5 +15,3 @@ router ospf {{vrf_vlan}} vrf {{ vrf_name }}
 {% for item in ospf.networks %}
  network {{ item.network }} {{ item.wildcard_mask }} area {{ item.area }}
 {% endfor %}
-!
-!
