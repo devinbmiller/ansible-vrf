@@ -1,6 +1,4 @@
-F Builder ##
-
-### This playbook currently supports builing VRF configurations for: ###
+### This playbook currently supports building VRF configurations for: ###
 * Cisco 2911 Routers
 
 ---
