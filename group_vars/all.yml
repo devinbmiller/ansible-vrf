@@ -25,7 +25,6 @@ transport2_vlan: "1742"
 transport2_ip: "172.0.5.6"
 transport2_mask: "255.255.255.252"
 
-
 # OSPF Variables
 ospf_vrf_area: "12345"
 

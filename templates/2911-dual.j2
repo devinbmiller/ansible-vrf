@@ -27,6 +27,9 @@ interface {{ transport1_interface }}.{{ transport1_vlan }}
 {% endif %}
 !
 {% if inventory_hostname == "router2" %}
-TESTESTESTEST
-{{ transport2_ip }}
+interface {{ transport2_interface }}.{{ transport2_vlan }}
+ description L3 TRANSPORT INTERFACE TO MAN {{ vrf_name }}
+ encapsulation dot1Q {{ transport2_vlan }}
+ vrf forwarding {{ vrf_name }}
+ ip address {{ transport2_ip }} {{ transport2_mask }}
 {% endif %}
