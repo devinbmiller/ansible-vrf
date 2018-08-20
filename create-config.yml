@@ -9,6 +9,6 @@
 
   - name: BUILD 2911 Router Configuration
     template:
-      src=templates/2911-router.j2
+      `src=templates/2911-router-base.j2
       dest=configs/{{ router_name }}.conf
     tags: build-2911

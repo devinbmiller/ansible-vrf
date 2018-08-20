@@ -12,7 +12,18 @@ vrf_vlan: "1740"
 # LAN Interface variables
 router_lan_interface: "GigabitEthernet0/0/0"
 fhrp_group: "780"
-fhrp_gw_ip: "172.16.0.1" 
+fhrp_gw_ip: "172.16.0.1"
+
+# Transport Uplink Variables
+transport1_interface: "GigabitEthernet0/0"
+transport1_vlan: "1741"
+transport1_ip: "172.0.5.2"
+transport1_mask: "255.255.255.252"
+
+transport2_interface: "GigabitEthernet0/1"
+transport2_vlan: "1742"
+transport2_ip: "172.0.5.6"
+transport2_mask: "255.255.255.252"
 
 # OSPF Variables
 ospf_vrf_area: "12345"
