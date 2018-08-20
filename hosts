@@ -1,6 +1,6 @@
 [2911-router]
 router1 role=router
-router2 role=router
+#router2 role=router
 
 [ios:children]
 2911-router
