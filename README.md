@@ -6,18 +6,16 @@
 ---
 ### Instructions: ###
 
-Hosts:
-1. One
-2. Two
-
+Hosts: `hosts` file
+1. Single router configurations
+ + Do nothing or comment out router2
+ + Do NOT modify the names router1 and router2
 
 Create Config:
-1. One
-2. Two
+1. 
 
 Push Config:
-1. One
-2. Two
+1. This has not yet been implemented
    
 ---
 ### Assumptions: ###
