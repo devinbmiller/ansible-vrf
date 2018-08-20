@@ -11,13 +11,15 @@ interface {{ transport2_interface }}.{{ transport2_vlan }}
  ip address {{ transport2_ip }} {{ transport2_mask }}
 !
 !
-interface {{ lan_interface1 }}
- description LAG to access switch
- no ip address
- channel-group {{ lag_interface }}.{{ vrf_vlan }}
-!
-interface {{ lan_interface2 }}
- description LAG to access switch
- no ip address
- channel-group {{ lag_interface }}.{{ vrf_vlan }}
+interface {{ lag_interface }}.{{ vrf_vlan }}
+ description L3 LAN INTERFACE {{ vrf_name }}
+ encapsulation dot1Q {{ vrf_vlan }}
+ vrf forwarding {{ vrf_name }}
+ ip address {{ vrf_router_ip }} {{ vrf_router_mask }}
+ ip helper-address 10.200.112.125
+ ip helper-address 10.200.123.26
+ ip helper-address 10.3.112.126
+ ip pim sparse-mode
+ glbp {{ fhrp_group }} ip {{ fhrp_gw_ip }}
+ glbp {{ fhrp_group }} timers 1 3
 

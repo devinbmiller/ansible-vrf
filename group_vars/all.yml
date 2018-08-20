@@ -10,8 +10,7 @@ vrf_name: "guestVRF"
 vrf_vlan: "1740"
 
 # LAN Interface variables
-lan_interface1: "GigabitEthernet0/0/0"
-lan_interface2: "GigabitEthernet0/1/0"  # used in sigle-router LAG to access switch
+lan_interface: "GigabitEthernet0/0/0"
 fhrp_group: "780"
 fhrp_gw_ip: "172.16.0.1"
 lag_interface: "Port-channel1"
@@ -33,4 +32,4 @@ ospf:
   networks:
       # Add as many or few networks as desired 
     - { network: "172.16.0.0", wildcard_mask: "0.0.7.255", area: "{{ ospf_vrf_area }}" }
-    - { network: "172.0.5.0", wildcard_mask: "0.0.0.255", area: "0" }
+    #- { network: "172.0.5.0", wildcard_mask: "0.0.0.255", area: "0" }
