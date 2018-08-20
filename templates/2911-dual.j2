@@ -5,6 +5,22 @@ interface {{ intra_router_interface }}.{{ vrf_vlan }}
  ip address {{ intra_router_ip }} {{ intra_router_mask }}
 !
 !
+{% if inventory_hostname == "router1" %}
+interface {{ transport1_interface }}.{{ transport1_vlan }}
+ description L3 TRANSPORT INTERFACE TO MAN {{ vrf_name }}
+ encapsulation dot1Q {{ transport1_vlan }}
+ vrf forwarding {{ vrf_name }}
+ ip address {{ transport1_ip }} {{ transport1_mask }}
+{% endif %}
+{% if inventory_hostname == "router2" %}
+interface {{ transport2_interface }}.{{ transport2_vlan }}
+ description L3 TRANSPORT INTERFACE TO MAN {{ vrf_name }}
+ encapsulation dot1Q {{ transport2_vlan }}
+ vrf forwarding {{ vrf_name }}
+ ip address {{ transport2_ip }} {{ transport2_mask }}
+{% endif %}
+!
+!
 interface {{ router_lan_interface }}.{{ vrf_vlan }}
  description L3 LAN INTERFACE {{ vrf_name }}
  encapsulation dot1Q {{ vrf_vlan }}
@@ -16,20 +32,3 @@ interface {{ router_lan_interface }}.{{ vrf_vlan }}
  ip pim sparse-mode
  glbp {{ fhrp_group }} ip {{ fhrp_gw_ip }}
  glbp {{ fhrp_group }} timers 1 3
-!
-!
-{% if inventory_hostname == "router1" %}
-interface {{ transport1_interface }}.{{ transport1_vlan }}
- description L3 TRANSPORT INTERFACE TO MAN {{ vrf_name }}
- encapsulation dot1Q {{ transport1_vlan }}
- vrf forwarding {{ vrf_name }}
- ip address {{ transport1_ip }} {{ transport1_mask }}
-{% endif %}
-!
-{% if inventory_hostname == "router2" %}
-interface {{ transport2_interface }}.{{ transport2_vlan }}
- description L3 TRANSPORT INTERFACE TO MAN {{ vrf_name }}
- encapsulation dot1Q {{ transport2_vlan }}
- vrf forwarding {{ vrf_name }}
- ip address {{ transport2_ip }} {{ transport2_mask }}
-{% endif %}
