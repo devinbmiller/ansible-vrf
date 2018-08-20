@@ -10,9 +10,11 @@ vrf_name: "guestVRF"
 vrf_vlan: "1740"
 
 # LAN Interface variables
-router_lan_interface: "GigabitEthernet0/0/0"
+lan_interface1: "GigabitEthernet0/0/0"
+lan_interface2: "GigabitEthernet0/1/0"  # used in sigle-router LAG to access switch
 fhrp_group: "780"
 fhrp_gw_ip: "172.16.0.1"
+lag_interface: "Port-channel1"
 
 # Transport Uplink Variables
 transport1_interface: "GigabitEthernet0/0"

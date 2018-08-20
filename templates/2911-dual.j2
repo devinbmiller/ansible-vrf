@@ -21,7 +21,7 @@ interface {{ transport2_interface }}.{{ transport2_vlan }}
 {% endif %}
 !
 !
-interface {{ router_lan_interface }}.{{ vrf_vlan }}
+interface {{ lan_interface1 }}.{{ vrf_vlan }}
  description L3 LAN INTERFACE {{ vrf_name }}
  encapsulation dot1Q {{ vrf_vlan }}
  vrf forwarding {{ vrf_name }}
