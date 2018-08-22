@@ -4,9 +4,9 @@ vrf definition {{ vrf_name }}
 !
 !
 {% if dual_routers == True %}
-{% include "2911-dual.j2" %}
+  {%- include "2911-dual.j2" %}
 {% else %}
-{% include "2911-single.j2" %}
+  {%- include "2911-single.j2" %}
 {% endif %}
 !
 !
