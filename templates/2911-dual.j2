@@ -11,25 +11,36 @@ interface {{ transport1_interface }}.{{ transport1_vlan }}
  encapsulation dot1Q {{ transport1_vlan }}
  vrf forwarding {{ vrf_name }}
  ip address {{ transport1_ip }} {{ transport1_mask }}
-{% endif %}
-{% if inventory_hostname == "router2" %}
-interface {{ transport2_interface }}.{{ transport2_vlan }}
- description L3 TRANSPORT INTERFACE TO MAN {{ vrf_name }}
- encapsulation dot1Q {{ transport2_vlan }}
- vrf forwarding {{ vrf_name }}
- ip address {{ transport2_ip }} {{ transport2_mask }}
-{% endif %}
 !
 !
-interface {{ lan_interface }}.{{ vrf_vlan }}
+interface {{ vrf_lan.interface_1.name }}.{{ vrf_vlan }}
  description L3 LAN INTERFACE {{ vrf_name }}
  encapsulation dot1Q {{ vrf_vlan }}
  vrf forwarding {{ vrf_name }}
- ip address {{ vrf_router_ip }} {{ vrf_router_mask }}
+ ip address {{ vrf_lan.interface_1.ip }} {{ vrf_lan.mask }}
  ip helper-address 10.200.112.125
  ip helper-address 10.200.123.26
  ip helper-address 10.3.112.126
  ip pim sparse-mode
  {{ vrf_lan.fhrp_type }} {{ vrf_lan.fhrp_group }} ip {{ vrf_lan.fhrp_gw_ip }}
  {{ vrf_lan.fhrp_type }} {{ vrf_lan.fhrp_group }} timers 1 3
-
+{% else %}
+interface {{ transport2_interface }}.{{ transport2_vlan }}
+ description L3 TRANSPORT INTERFACE TO MAN {{ vrf_name }}
+ encapsulation dot1Q {{ transport2_vlan }}
+ vrf forwarding {{ vrf_name }}
+ ip address {{ transport2_ip }} {{ transport2_mask }}
+!
+!
+interface {{ vrf_lan.interface_2.name }}.{{ vrf_vlan }}
+ description L3 LAN INTERFACE {{ vrf_name }}
+ encapsulation dot1Q {{ vrf_vlan }}
+ vrf forwarding {{ vrf_name }}
+ ip address {{ vrf_lan.interface_2.ip }} {{ vrf_lan.mask }}
+ ip helper-address 10.200.112.125
+ ip helper-address 10.200.123.26
+ ip helper-address 10.3.112.126
+ ip pim sparse-mode
+ {{ vrf_lan.fhrp_type }} {{ vrf_lan.fhrp_group }} ip {{ vrf_lan.fhrp_gw_ip }}
+ {{ vrf_lan.fhrp_type }} {{ vrf_lan.fhrp_group }} timers 1 3
+{% endif %}

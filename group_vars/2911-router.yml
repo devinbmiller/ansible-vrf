@@ -2,7 +2,7 @@
 # This file contains variables that should be shared across 2911 Routers 
 
 # Are there two routers?
-dual_routers: False 
+dual_routers: True
 intra_router_interface: "GigabitEthernet0/2"
 
 # Basic VRF variables
