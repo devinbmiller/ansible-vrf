@@ -11,7 +11,7 @@ vrf definition {{ vrf_name }}
 !
 !
 router ospf {{vrf_vlan}} vrf {{ vrf_name }}
- router-id {{ vrf_router_ip }} 
+ router-id {{ vrf_lan.interface_1.ip }} 
  auto-cost reference-bandwidth 100000
  capability vrf-lite
 {% for item in ospf.networks %}

@@ -9,11 +9,15 @@ intra_router_interface: "GigabitEthernet0/2"
 vrf_name: "guestVRF"
 vrf_vlan: "1740"
 
-# LAN Interface variables
-lan_interface: "GigabitEthernet0/0/0"
-fhrp_group: "780"
-fhrp_gw_ip: "172.16.0.1"
-lag_interface: "Port-channel1"
+# LAN Interface(s) variables
+vrf_lan:
+  interface_1: { name: "GigabitEthernet0/0/0", ip: "172.16.0.2" }
+  interface_2: { name: "GigabitEthernet0/0/0", ip: "172.16.0.3" }    # Used in dual router deployments
+  mask: "255.255.255.0"
+  lag_interface: "Port-channel1"  # Normally used in single router deployments
+  fhrp_type: "glbp" #currently not implemented
+  fhrp_group: "780"
+  fhrp_gw_ip: "172.16.0.1"
 
 # Transport Uplink Variables
 transport1_interface: "GigabitEthernet0/0"
