@@ -36,4 +36,3 @@ ospf:
   networks:
       # Add as many or few networks as desired 
     - { network: "172.16.0.0", wildcard_mask: "0.0.7.255", area: "{{ ospf_vrf_area }}" }
-    #- { network: "172.0.5.0", wildcard_mask: "0.0.0.255", area: "0" }
