@@ -1,14 +1,14 @@
-interface {{ transport1_interface }}.{{ transport1_vlan }}
+interface {{ transports.interface_1.name }}.{{ transports.interface_1.vlan }}
  description L3 TRANSPORT INTERFACE TO MAN {{ vrf_name }}
- encapsulation dot1Q {{ transport1_vlan }}
+ encapsulation dot1Q {{ transports.interface_1.vlan }}
  vrf forwarding {{ vrf_name }}
- ip address {{ transport1_ip }} {{ transport1_mask }}
+ ip address {{ transports.interface_1.ip }} {{ transports.mask }}
 !
-interface {{ transport2_interface }}.{{ transport2_vlan }}
+interface {{ transports.interface_2.name }}.{{ transports.interface_2.vlan }}
  description L3 TRANSPORT INTERFACE TO MAN {{ vrf_name }}
- encapsulation dot1Q {{ transport2_vlan }}
+ encapsulation dot1Q {{ transports.interface_2.vlan }}
  vrf forwarding {{ vrf_name }}
- ip address {{ transport2_ip }} {{ transport2_mask }}
+ ip address {{ transports.interface_2.ip }} {{ transports.mask }}
 !
 !
 interface {{ vrf_lan.lag_interface }}.{{ vrf_vlan }}

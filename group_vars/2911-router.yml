@@ -2,7 +2,7 @@
 # This file contains variables that should be shared across 2911 Routers 
 
 # Are there two routers True/False?
-dual_routers: True
+dual_routers: False
 
 # Basic VRF variables
 vrf_name: "guestVRF"
@@ -25,15 +25,10 @@ vrf_lan:
   fhrp_gw_ip: "172.16.0.1"
 
 # Transport Uplink Variables
-transport1_interface: "GigabitEthernet0/0"
-transport1_vlan: "1741"
-transport1_ip: "172.0.5.2"
-transport1_mask: "255.255.255.252"
-
-transport2_interface: "GigabitEthernet0/1"
-transport2_vlan: "1742"
-transport2_ip: "172.0.5.6"
-transport2_mask: "255.255.255.252"
+transports:
+  interface_1: { name: "GigabitEthernet0/0", vlan: "1741", ip: "172.0.5.2" }
+  interface_2: { name: "GigabitEthernet0/1", vlan: "1742", ip: "172.0.5.6" }
+  mask: "255.255.255.252"
 
 # OSPF Variables
 ospf_vrf_area: "12345"
