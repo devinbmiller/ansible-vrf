@@ -1,30 +1,34 @@
 ---
 # This file contains variables that should be shared across 2911 Routers 
 
-# Are there two routers?
-dual_routers: False 
-intra_router_interface: "GigabitEthernet0/2"
+# Are there two routers True/False?
+dual_routers: False
 
 # Basic VRF variables
 vrf_name: "guestVRF"
 vrf_vlan: "1740"
 
-# LAN Interface variables
-lan_interface: "GigabitEthernet0/0/0"
-fhrp_group: "780"
-fhrp_gw_ip: "172.16.0.1"
-lag_interface: "Port-channel1"
+# For Two Router Deployments
+intra_router:
+  interface_1: { name: "GigabitEthernet0/2", ip: "192.168.1.1", peer: "router2" }
+  interface_2: { name: "GigabitEthernet0/2", ip: "192.168.1.2", peer: "router1" }
+  mask: "255.255.255.252"
+
+# LAN Interface(s) variables
+vrf_lan:
+  interface_1: { name: "GigabitEthernet0/0/0", ip: "172.16.0.2" }
+  interface_2: { name: "GigabitEthernet0/0/0", ip: "172.16.0.3" }    # Used in dual router deployments
+  mask: "255.255.255.0"
+  lag_interface: "Port-channel1"  # Normally used in single router deployments to access switch
+  fhrp_type: "glbp"
+  fhrp_group: "780"
+  fhrp_gw_ip: "172.16.0.1"
 
 # Transport Uplink Variables
-transport1_interface: "GigabitEthernet0/0"
-transport1_vlan: "1741"
-transport1_ip: "172.0.5.2"
-transport1_mask: "255.255.255.252"
-
-transport2_interface: "GigabitEthernet0/1"
-transport2_vlan: "1742"
-transport2_ip: "172.0.5.6"
-transport2_mask: "255.255.255.252"
+transports:
+  interface_1: { name: "GigabitEthernet0/0", vlan: "1741", ip: "172.0.5.2" }
+  interface_2: { name: "GigabitEthernet0/1", vlan: "1742", ip: "172.0.5.6" }
+  mask: "255.255.255.252"
 
 # OSPF Variables
 ospf_vrf_area: "12345"

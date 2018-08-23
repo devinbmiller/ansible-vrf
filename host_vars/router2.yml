@@ -1,13 +1,5 @@
 ---
 # This file should contain variables unique to router2
 # NOTE: You only need to fill this out in a 2-router configuration
-router_name: "BLDG-2911-2"
 
-# These are used in a two router configuration
-peer_router: "router1"
-intra_router_ip: "192.168.1.2"
-intra_router_mask: "255.255.255.250"
-
-# This is for the router2's LAN interface
-vrf_router_ip: "172.16.0.3"
-vrf_router_mask: "255.255.255.0"
+router_name: "BLDG-2911-2"    # This is used for the resulting config file name only

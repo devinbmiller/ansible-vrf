@@ -4,14 +4,18 @@ vrf definition {{ vrf_name }}
 !
 !
 {% if dual_routers == True %}
-{% include "2911-dual.j2" %}
+  {%- include "2911-dual.j2" %}
 {% else %}
-{% include "2911-single.j2" %}
+  {%- include "2911-single.j2" %}
 {% endif %}
 !
 !
 router ospf {{vrf_vlan}} vrf {{ vrf_name }}
- router-id {{ vrf_router_ip }} 
+ {% if inventory_hostname == 'router1' -%}
+ router-id {{ vrf_lan.interface_1.ip }}
+ {% else -%}
+ router-id {{ vrf_lan.interface_2.ip }}
+ {% endif -%}
  auto-cost reference-bandwidth 100000
  capability vrf-lite
 {% for item in ospf.networks %}
