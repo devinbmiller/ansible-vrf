@@ -24,8 +24,7 @@ Create Config:
    + Set `dual_routers` to `True` for dual router deployments; otherwise set to `False`
 2. Edit the `host_vars/router1.yml / host_vars/router2.yml` files
    + This contains variables that are unique to each router depending on scenario
-   + The variable names should be self-describing
-   + The `router_name` variable will be used in the resulting configuration(s) file names
+   + The `router_name` variable will be used in the resulting configuration(s) file names ONLY
 3. Generate the configurations:
    + Run the command `ansible-playbook -i hosts create-config.yml`
 4. Configurations will be written to the `configs/` directory
