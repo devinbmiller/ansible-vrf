@@ -1,21 +1,26 @@
 ---
 # This file contains variables that should be shared across 2911 Routers 
 
-# Are there two routers?
+# Are there two routers True/False?
 dual_routers: True
-intra_router_interface: "GigabitEthernet0/2"
 
 # Basic VRF variables
 vrf_name: "guestVRF"
 vrf_vlan: "1740"
+
+# For Two Router Deployments
+intra_router:
+  interface_1: { name: "GigabitEthernet0/2", ip: "192.168.1.1", peer: "router2" }
+  interface_2: { name: "GigabitEthernet0/2", ip: "192.168.1.2", peer: "router1" }
+  mask: "255.255.255.252"
 
 # LAN Interface(s) variables
 vrf_lan:
   interface_1: { name: "GigabitEthernet0/0/0", ip: "172.16.0.2" }
   interface_2: { name: "GigabitEthernet0/0/0", ip: "172.16.0.3" }    # Used in dual router deployments
   mask: "255.255.255.0"
-  lag_interface: "Port-channel1"  # Normally used in single router deployments
-  fhrp_type: "glbp" #currently not implemented
+  lag_interface: "Port-channel1"  # Normally used in single router deployments to access switch
+  fhrp_type: "glbp"
   fhrp_group: "780"
   fhrp_gw_ip: "172.16.0.1"
 
