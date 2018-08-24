@@ -25,8 +25,8 @@ Create Config:
 2. Edit the `host_vars/router1.yml / host_vars/router2.yml` files
    + This contains variables that are unique to each router depending on scenario
    + The `router_name` variable will be used in the resulting configuration(s) file names ONLY
-3. Generate the configurations:
-   + Run the command `ansible-playbook -i hosts create-config.yml`
+3. Generate the configurations by running a task by specifying its tag:
+   + Run the command `ansible-playbook -i hosts create-config.yml --tags 'build-2911`
 4. Configurations will be written to the `configs/` directory
    + Check configurations for accuracy
    + Follow normal workflow for deploying them to routers
