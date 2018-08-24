@@ -20,3 +20,24 @@ interface {{ L2.trans_2.name }}
  switchport trunk allowed vlan add {{ L2.trans_2.vlan }}
 !
 !
+interface Vlan{{ L3.vrf_lan.name }}
+ description {{ vrfs.name }}
+ vrf forwarding {{ vrfs.name }}
+ {% if inventory_hostname == 'router1' -%}
+ ip address {{ L3.vrf_lan.r1_ip }} {{ L3.vrf_lan.mask }}
+ {% else -%}
+ ip address {{ L3.vrf_lan.r2_ip }} {{ L3.vrf_lan.mask }}
+ {% endif -%}
+ ip helper-address 10.200.123.80
+ ip helper-address 10.3.122.23
+ no ip redirects
+ ip pim sparse-mode
+ standby version 2
+ standby {{ fhrp.HSRP.group }} ip {{ fhrp.HSRP.gw_ip }}
+ standby {{ fhrp.HSRP.group }} timers 1 3
+{% if inventory_hostname == 'router1' %}
+ standby {{ fhrp.HSRP.group }} priority 110
+ standby {{ fhrp.HSRP.group }} preempt
+{% endif -%}
+!
+!

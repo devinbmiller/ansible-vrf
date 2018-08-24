@@ -19,6 +19,10 @@ L2:
 
 # L3 SVI Interfaces
 L3:
-  vrf_lan: { name: "{{ L2.lag.vlan }}", ip: "10.174.84.2", mask: "255.255.252.0" }
-  trans_1: { name: "{{ L2.trans_1.vlan }}", ip: "10.175.254.174", mask: "255.255.255.252" }
-  trans_2: { name: "{{ L2.trans_2.vlan }}", ip: "10.175.254.166", mask: "{{ L3.trans_1.mask }}" }
+  vrf_lan: { name: "{{ L2.lag.vlan }}", r1_ip: "10.174.84.2", r2_ip: "10.174.84.3", mask: "255.255.252.0" }
+  trans_1: { name: "{{ L2.trans_1.vlan }}", r1_ip: "10.175.254.174", r2_ip: "10.5.1.174", mask: "255.255.255.252" }
+  trans_2: { name: "{{ L2.trans_2.vlan }}", r1_ip: "10.175.254.166", r2_ip: "10.0.1.174", mask: "255.255.255.252" }
+
+fhrp:
+  HSRP: { group: "1740", gw_ip: "10.174.84.1", priority: "110" }
+  GLBP: { group: "1740", gw_ip: "10.174.84.1" }
