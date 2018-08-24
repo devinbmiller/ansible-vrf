@@ -12,3 +12,9 @@
       src=templates/2911-router-base.j2
       dest=configs/{{ router_name }}.conf
     tags: build-2911
+  
+  - name: BUILD 4500 Router Configuration
+    template:
+      src=templates/4500-router-base.j2
+      dest=configs/{{ router_name }}.conf
+    tags: build-4500
