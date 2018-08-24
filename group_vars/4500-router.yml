@@ -1,0 +1,24 @@
+---
+# This file contains variables that should be shared across 4500x Routers
+ 
+# List if VRF(s) to define
+vrfs:
+  name: "guestVRF"
+
+# List of VRF related VLANS to create
+vlans:
+  - { id: "1740", name: "guestVRF" }
+  - { id: "1741", name: "Transport1 guestVRF" }
+  - { id: "1742", name: "Transport2 guestVRF" }
+
+# L2 Interfaces
+L2:
+  lag: { name: "Port-channel1", vlan: "1740" }
+  trans_1: { name: "TenGigabitEthernet1/3", vlan: "1741" }
+  trans_2: { name: "TenGigabitEthernet1/4", vlan: "1742" }
+
+# L3 SVI Interfaces
+L3:
+  vrf_lan: { name: "{{ L2.lag.vlan }}", ip: "10.174.84.2", mask: "255.255.252.0" }
+  trans_1: { name: "{{ L2.trans_1.vlan }}", ip: "10.175.254.174", mask: "255.255.255.252" }
+  trans_2: { name: "{{ L2.trans_2.vlan }}", ip: "10.175.254.166", mask: "{{ L3.trans_1.mask }} } 
