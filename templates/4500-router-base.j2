@@ -10,6 +10,13 @@ vlan {{ vlan.id }}
 !
 {% endfor %}
 !
+{% if inventory_hostname == 'router1' -%}
+spanning-tree vlan {{ L2.lag.vlan }} priority 24576
+{% else %}
+spanning-tree vlan {{ L2.lag.vlan }} priority 28672
+{% endif %}
+!
+!
 interface {{ L2.lag.name }}
  switchport trunk allowed vlan add {{ L2.lag.vlan }}
 !
