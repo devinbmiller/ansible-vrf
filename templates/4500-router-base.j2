@@ -1,0 +1,22 @@
+vrf definition {{ vrfs.name }}
+ !
+ address-family ipv4
+ exit-address-family
+!
+!
+{% for vlan in vlans %}
+vlan {{ vlan.id }}
+ name {{ vlan.name }}
+!
+{% endfor %}
+!
+interface {{ L2.lag.name }}
+ switchport trunk allowed vlan add {{ L2.lag.vlan }}
+!
+interface {{ L2.trans_1.name }}
+ switchport trunk allowed vlan add {{ L2.trans_1.vlan }}
+!
+interface {{ L2.trans_2.name }}
+ switchport trunk allowed vlan add {{ L2.trans_2.vlan }}
+!
+!

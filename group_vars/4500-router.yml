@@ -21,4 +21,4 @@ L2:
 L3:
   vrf_lan: { name: "{{ L2.lag.vlan }}", ip: "10.174.84.2", mask: "255.255.252.0" }
   trans_1: { name: "{{ L2.trans_1.vlan }}", ip: "10.175.254.174", mask: "255.255.255.252" }
-  trans_2: { name: "{{ L2.trans_2.vlan }}", ip: "10.175.254.166", mask: "{{ L3.trans_1.mask }} } 
+  trans_2: { name: "{{ L2.trans_2.vlan }}", ip: "10.175.254.166", mask: "{{ L3.trans_1.mask }}" }
