@@ -23,6 +23,16 @@ L3:
   trans_1: { name: "{{ L2.trans_1.vlan }}", r1_ip: "10.175.254.174", r2_ip: "10.5.1.174", mask: "255.255.255.252" }
   trans_2: { name: "{{ L2.trans_2.vlan }}", r1_ip: "10.175.254.166", r2_ip: "10.0.1.174", mask: "255.255.255.252" }
 
+# First-Hop-Redundancy Protocol Variables  
 fhrp:
   HSRP: { group: "1740", gw_ip: "10.174.84.1", priority: "110" }
-  GLBP: { group: "1740", gw_ip: "10.174.84.1" }
+  GLBP: { group: "1740", gw_ip: "10.174.84.1" }   # picking between different FHRP in future
+
+# Routing/Protocol Variables  
+ospf_vrf_area: "17484"
+ospf_summary: { network: "10.174.84.0", mask: "{{ L3.vrf_lan.mask }}" }
+routing:
+  ospf:
+    networks:
+      - { network: "10.174.84.0", mask: "0.0.3.255", area: "{{ ospf_vrf_area }}" }
+      - { network: "10.175.248.0", mask: "0.0.7.255", area: "0" }        

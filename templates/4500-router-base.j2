@@ -20,6 +20,29 @@ interface {{ L2.trans_2.name }}
  switchport trunk allowed vlan add {{ L2.trans_2.vlan }}
 !
 !
+interface Vlan{{ L3.trans_1.name }}
+ description guestVRF Taxi-Core Transport
+ vrf forwarding {{ vrfs.name }}
+ {% if inventory_hostname == 'router1' -%}
+ ip address {{ L3.trans_1.r1_ip }} {{ L3.trans_1.mask }}
+ {% else -%}
+ ip address {{ L3.trans_1.r2_ip }} {{ L3.trans_1.mask }}
+ {% endif -%}
+ no ip redirects
+ ip pim sparse-mode
+!
+interface Vlan{{ L3.trans_2.name }}
+ description guestVRF OPS-Core Transport
+ vrf forwarding {{ vrfs.name }}
+ {% if inventory_hostname == 'router1' -%}
+ ip address {{ L3.trans_2.r1_ip }} {{ L3.trans_2.mask }}
+ {% else -%}
+ ip address {{ L3.trans_2.r2_ip }} {{ L3.trans_2.mask }}
+ {% endif -%}
+ no ip redirects
+ ip pim sparse-mode
+!
+!
 interface Vlan{{ L3.vrf_lan.name }}
  description {{ vrfs.name }}
  vrf forwarding {{ vrfs.name }}
@@ -39,5 +62,19 @@ interface Vlan{{ L3.vrf_lan.name }}
  standby {{ fhrp.HSRP.group }} priority 110
  standby {{ fhrp.HSRP.group }} preempt
 {% endif -%}
+!
+!
+router ospf {{ L2.lag.vlan }} vrf {{ vrfs.name }}
+ {% if inventory_hostname == 'router1' -%}
+ router-id {{ L3.vrf_lan.r1_ip }}
+ {% else -%}
+ router-id {{ L3.vrf_lan.r2_ip }}
+ {% endif -%}
+ auto-cost reference-bandwidth 100000
+ capability vrf-lite
+ {% for network in routing.ospf.networks -%}
+ network {{ network.network }} {{ network.mask }} area {{ network.area }}
+ {% endfor -%}
+ area {{ ospf_vrf_area }} range {{ ospf_summary.network }} {{ ospf_summary.mask }}
 !
 !
