@@ -6,7 +6,6 @@ router2 role=router
 
 [4500-router]
 # DO NOT CHANGE THESE NAMES
-# You may comment out router2 in single router delpoyment to prevent its config from being generated
 router1 role=router
 router2 role=router
 
