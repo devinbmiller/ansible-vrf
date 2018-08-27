@@ -10,7 +10,7 @@
   - name: BUILD 2911 Router Configuration
     template:
       src=templates/2911-router-base.j2
-      dest=configs/{{ router_name }}.conf
+      dest=configs/{{ inventory_hostname }}.conf
     tags: build-2911
   
 - name: Build 4500 VRF Configurations
