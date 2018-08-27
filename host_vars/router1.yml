@@ -1,4 +1,4 @@
 ---
 # This file should contain variables unique to router1
 
-router_name: "BLDG-2911-1"    # This is used for the resulting config file name only
+#router_name: "BLDG-4500-1"    # This is used for the resulting config file name only

@@ -1,8 +1,13 @@
 [2911-router]
 # DO NOT CHANGE THESE NAMES
 # You may comment out router2 in single router delpoyment to prevent its config from being generated
-router1 role=router
-router2 role=router
+router1
+router2
+
+[4500-routers]
+J2386-DST-4K1
+J2386-DST-4K2
 
 [ios:children]
 2911-router
+4500-routers
