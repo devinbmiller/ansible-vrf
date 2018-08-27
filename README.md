@@ -11,29 +11,41 @@
    + Change to cloned directory `cd vrf_config`
 
 ### Instructions: ###
-Hosts: `hosts` file
-+ Single router deployments:
+
+#### 4500x Switches ####
+Edit the hosts: `hosts` file
++ Under `[4500-routers]` section:
+   - Add a signle host name per line for a total of two hosts
+   - Note the tag of `build-4500`. This will be used to run only this section of the playbook later
+
+Create Config:
+1. Edit the `group_vars/4500-routers.yml` file
+   + This contains variables that are shared for both 4500x switches
+   + The variable names should be self-describing
+2. Generate the configurations by running a task by specifying its tag (build-4500):
+   + Run the command `ansible-playbook -i hosts create-config.yml --tags 'build-4500'`
+3. Configurations will be written to the `configs/` directory
+   + Check configurations for accuracy
+   + Follow normal workflow for deploying them to routers
+
+#### 2911 Routers ####
+Edit the hosts: `hosts` file
++ Under `[2911-router]` section:
    - Do nothing or comment out `router2`
    - Do NOT modify the names `router1` and `router2`
 + Dual router deployments:
    - Make sure `router1` and `router2` are uncommented
 
 Create Config:
-1. Edit the `group_vars/2911-router.yml` or `group_vars/4500-router.yml` file
+1. Edit the `group_vars/2911-router.yml` file
    + This contains variables that are shared across single/dual router scenarios
    + The variable names should be self-describing
    + Set `dual_routers` to `True` for dual router deployments; otherwise set to `False`
-2. Edit the `host_vars/router1.yml / host_vars/router2.yml` files
-   + This contains variables that are unique to each router depending on scenario
-   + The `router_name` variable will be used in the resulting configuration(s) file names ONLY
-3. Generate the configurations by running a task by specifying its tag (build-2911 or build-4500):
-   + Run the command `ansible-playbook -i hosts create-config.yml --tags 'build-4500'`
-4. Configurations will be written to the `configs/` directory
+2. Generate the configurations by running a task by specifying its tag (build-2911):
+   + Run the command `ansible-playbook -i hosts create-config.yml --tags 'build-2911'`
+3. Configurations will be written to the `configs/` directory
    + Check configurations for accuracy
    + Follow normal workflow for deploying them to routers
-
-Push Config:
-1. This has not yet been implemented
 
 ---
 ### Assumptions/Caveats: ###
@@ -48,6 +60,3 @@ Push Config:
 ### Contributing ###
 + For any bugs, corrections, or requests submit via [Github Repository Issues](https://github.com/devinbmiller/ansible-vrf/issues)
 + Feel free to clone/fork the project, create a branch, add features, then submit pull-request
----
-TODO
-+ Add Section about runnning playbook for specific tags*
