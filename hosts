@@ -5,8 +5,8 @@ router1
 router2
 
 [4500-router]
-BLDG-4500-1
-BLDG-4500-2
+J2386-DST-4K1
+J2386-DST-4K2
 
 [ios:children]
 2911-router
