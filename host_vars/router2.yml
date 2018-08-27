@@ -2,4 +2,4 @@
 # This file should contain variables unique to router2
 # NOTE: You only need to fill this out in a 2-router configuration
 
-router_name: "BLDG-4500-2"    # This is used for the resulting config file name only
+#router_name: "BLDG-4500-2"    # This is used for the resulting config file name only

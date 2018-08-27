@@ -10,7 +10,7 @@ vlan {{ vlan.id }}
 !
 {% endfor %}
 !
-{% if inventory_hostname == 'router1' -%}
+{% if inventory_hostname == groups['4500-router'][0] -%}
 spanning-tree vlan {{ L2.lag.vlan }} priority 24576
 {% else %}
 spanning-tree vlan {{ L2.lag.vlan }} priority 28672
@@ -30,7 +30,7 @@ interface {{ L2.trans_2.name }}
 interface Vlan{{ L3.trans_1.name }}
  description guestVRF Taxi-Core Transport
  vrf forwarding {{ vrfs.name }}
- {% if inventory_hostname == 'router1' -%}
+ {% if inventory_hostname == groups['4500-router'][0] -%}
  ip address {{ L3.trans_1.r1_ip }} {{ L3.trans_1.mask }}
  {% else -%}
  ip address {{ L3.trans_1.r2_ip }} {{ L3.trans_1.mask }}
@@ -41,7 +41,7 @@ interface Vlan{{ L3.trans_1.name }}
 interface Vlan{{ L3.trans_2.name }}
  description guestVRF OPS-Core Transport
  vrf forwarding {{ vrfs.name }}
- {% if inventory_hostname == 'router1' -%}
+ {% if inventory_hostname == groups['4500-router'][0] -%}
  ip address {{ L3.trans_2.r1_ip }} {{ L3.trans_2.mask }}
  {% else -%}
  ip address {{ L3.trans_2.r2_ip }} {{ L3.trans_2.mask }}
@@ -53,7 +53,7 @@ interface Vlan{{ L3.trans_2.name }}
 interface Vlan{{ L3.vrf_lan.name }}
  description {{ vrfs.name }}
  vrf forwarding {{ vrfs.name }}
- {% if inventory_hostname == 'router1' -%}
+ {% if inventory_hostname == groups['4500-router'][0] -%}
  ip address {{ L3.vrf_lan.r1_ip }} {{ L3.vrf_lan.mask }}
  {% else -%}
  ip address {{ L3.vrf_lan.r2_ip }} {{ L3.vrf_lan.mask }}
@@ -65,14 +65,14 @@ interface Vlan{{ L3.vrf_lan.name }}
  standby version 2
  standby {{ fhrp.HSRP.group }} ip {{ fhrp.HSRP.gw_ip }}
  standby {{ fhrp.HSRP.group }} timers 1 3
-{% if inventory_hostname == 'router1' %}
+{% if inventory_hostname == groups['4500-router'][0] %}
  standby {{ fhrp.HSRP.group }} priority 110
  standby {{ fhrp.HSRP.group }} preempt
 {% endif -%}
 !
 !
 router ospf {{ L2.lag.vlan }} vrf {{ vrfs.name }}
- {% if inventory_hostname == 'router1' -%}
+ {% if inventory_hostname == groups['4500-router'][0] -%}
  router-id {{ L3.vrf_lan.r1_ip }}
  {% else -%}
  router-id {{ L3.vrf_lan.r2_ip }}

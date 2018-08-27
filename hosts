@@ -5,9 +5,8 @@ router1
 router2
 
 [4500-router]
-# DO NOT CHANGE THESE NAMES
-router1
-router2
+BLDG-4500-1
+BLDG-4500-2
 
 [ios:children]
 2911-router

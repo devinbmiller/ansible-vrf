@@ -1,7 +1,7 @@
 ---
 
-- name: Build VRF Configurations
-  hosts: ios 
+- name: Build 2911 VRF Configurations
+  hosts: 2911-router 
   connection: local
   gather_facts: no
 
@@ -13,8 +13,15 @@
       dest=configs/{{ router_name }}.conf
     tags: build-2911
   
+- name: Build 4500 VRF Configurations
+  hosts: 4500-router 
+  connection: local
+  gather_facts: no
+
+  tasks:
+  
   - name: BUILD 4500 Router Configuration
     template:
       src=templates/4500-router-base.j2
-      dest=configs/{{ router_name }}.conf
+      dest=configs/{{ inventory_hostname }}.conf
     tags: build-4500
