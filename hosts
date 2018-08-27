@@ -4,10 +4,10 @@
 router1
 router2
 
-[4500-router]
+[4500-routers]
 J2386-DST-4K1
 J2386-DST-4K2
 
 [ios:children]
 2911-router
-4500-router
+4500-routers

@@ -1,7 +1,7 @@
 ---
 
 - name: Build 2911 VRF Configurations
-  hosts: 2911-router 
+  hosts: 2911-router
   connection: local
   gather_facts: no
 
@@ -14,7 +14,7 @@
     tags: build-2911
   
 - name: Build 4500 VRF Configurations
-  hosts: 4500-router 
+  hosts: 4500-routers 
   connection: local
   gather_facts: no
 
