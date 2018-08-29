@@ -23,5 +23,5 @@
   - name: BUILD 4500 Router Configuration
     template:
       src=templates/4500-router-base.j2
-      dest=configs/{{ inventory_hostname }}.conf
+      dest=configs/{{ inventory_hostname }}-{{ vrfs.name }}.conf
     tags: build-4500
