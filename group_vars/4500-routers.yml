@@ -9,7 +9,7 @@ vrfs:
 vlans:
   - { id: "1740", name: "guestVRF" }
   - { id: "1741", name: "TX-COR Transport guestVRF "}
-  - { id: "1742", name: "OPS-COR guestVRF" }
+  - { id: "1742", name: "OPS-COR Transport guestVRF" }
 
 # L2 Interfaces
 L2:
