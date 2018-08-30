@@ -37,6 +37,7 @@ interface Vlan{{ L3.trans_1.name }}
  {% endif -%}
  no ip redirects
  ip pim sparse-mode
+ no shutdown
 !
 interface Vlan{{ L3.trans_2.name }}
  description guestVRF OPS-Core Transport
@@ -48,6 +49,7 @@ interface Vlan{{ L3.trans_2.name }}
  {% endif -%}
  no ip redirects
  ip pim sparse-mode
+ no shutdown
 !
 !
 interface Vlan{{ L3.vrf_lan.name }}
@@ -68,7 +70,8 @@ interface Vlan{{ L3.vrf_lan.name }}
 {% if inventory_hostname == groups['4500-routers'][0] %}
  standby {{ fhrp.HSRP.group }} priority 110
  standby {{ fhrp.HSRP.group }} preempt
-{% endif -%}
+{% endif %}
+ no shutdown
 !
 !
 router ospf {{ L2.lag.vlan }} vrf {{ vrfs.name }}
