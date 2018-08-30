@@ -3,36 +3,36 @@
  
 # List if VRF(s) to define
 vrfs:
-  name: "GPLA_VRF"
+  name: "guestVRF"
 
 # List of VRF related VLANS to create
 vlans:
-  - { id: "1800", name: "GPLA_VRF" }
-  - { id: "1801", name: "TX-COR Transport GPLA_VRF" }
-  - { id: "1802", name: "OPS-COR GPLA_VRF" }
+  - { id: "1740", name: "guestVRF" }
+  - { id: "1741", name: "TX-COR Transport guestVRF "}
+  - { id: "1742", name: "OPS-COR guestVRF" }
 
 # L2 Interfaces
 L2:
-  lag: { name: "Port-channel1", vlan: "1800" }
-  trans_1: { name: "TenGigabitEthernet1/3", vlan: "1801" }
-  trans_2: { name: "TenGigabitEthernet1/4", vlan: "1802" }
+  lag: { name: "Port-channel1", vlan: "1740" }
+  trans_1: { name: "TenGigabitEthernet1/3", vlan: "1741" }
+  trans_2: { name: "TenGigabitEthernet1/4", vlan: "1742" }
 
 # L3 SVI Interfaces
 L3:
-  vrf_lan: { name: "{{ L2.lag.vlan }}", r1_ip: "10.180.32.2", r2_ip: "10.180.32.3", mask: "255.255.252.0" }
-  trans_1: { name: "{{ L2.trans_1.vlan }}", r1_ip: "10.181.255.126", r2_ip: "10.181.255.122", mask: "255.255.255.252" }
-  trans_2: { name: "{{ L2.trans_2.vlan }}", r1_ip: "10.181.255.118", r2_ip: "10.181.255.114", mask: "255.255.255.252" }
+  vrf_lan: { name: "{{ L2.lag.vlan }}", r1_ip: "10.174.20.2", r2_ip: "10.174.20.3", mask: "255.255.252.0" }
+  trans_1: { name: "{{ L2.trans_1.vlan }}", r1_ip: "10.175.255.174", r2_ip: "10.175.255.170", mask: "255.255.255.252" }
+  trans_2: { name: "{{ L2.trans_2.vlan }}", r1_ip: "10.175.255.166", r2_ip: "10.175.255.162", mask: "255.255.255.252" }
 
 # First-Hop-Redundancy Protocol Variables  
 fhrp:
-  HSRP: { group: "1800", gw_ip: "10.180.32.1", priority: "110" }
+  HSRP: { group: "1740", gw_ip: "10.174.20.1", priority: "110" }
   GLBP: { group: "1740", gw_ip: "10.174.84.1" }   # picking between different FHRP in future
 
 # Routing/Protocol Variables  
-ospf_vrf_area: "18032"
-ospf_summary: { network: "10.180.32.0", mask: "{{ L3.vrf_lan.mask }}" }
+ospf_vrf_area: "17420"
+ospf_summary: { network: "10.174.20.0", mask: "{{ L3.vrf_lan.mask }}" }
 routing:
   ospf:
     networks:
-      - { network: "10.180.32.0", mask: "0.0.3.255", area: "{{ ospf_vrf_area }}" }
-      - { network: "10.181.252.0", mask: "0.0.3.255", area: "0" }        
+      - { network: "10.174.20.0", mask: "0.0.3.255", area: "{{ ospf_vrf_area }}" }
+      - { network: "10.175.252.0", mask: "0.0.3.255", area: "0" }        
