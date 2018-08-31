@@ -1,0 +1,117 @@
+{% for vrf in vrfs %}
+vrf definition {{ vrf.name }}
+ !
+ address-family ipv4
+ exit-address-family
+!
+!
+{% for vlan in vrf.vlans %}
+vlan {{ vlan.id }}
+ name {{ vlan.name }}
+!
+{% endfor %}
+!
+{% if inventory_hostname == router_1.hostname %}
+spanning-tree vlan {{ vrf.router_1.lag.vlan }} priority {{ router_1.STP_priority }}
+{% else %}
+spanning-tree vlan {{ vrf.router_1.lag.vlan }} priority {{ router_2.STP_priority }}
+{% endif %} 
+!
+!
+interface {{ vrf.router_1.lag.name }}
+ switchport trunk allowed vlan add {{ vrf.router_1.lag.vlan }}
+!
+{% endfor %}
+{# Temporary commenting out block
+
+vrf definition {{ vrfs.name }}
+ !
+ address-family ipv4
+ exit-address-family
+!
+!
+{% for vlan in vlans %}
+vlan {{ vlan.id }}
+ name {{ vlan.name }}
+!
+{% endfor %}
+!
+{% if inventory_hostname == groups['4500-routers'][0] -%}
+spanning-tree vlan {{ L2.lag.vlan }} priority 24576
+{% else %}
+spanning-tree vlan {{ L2.lag.vlan }} priority 28672
+{% endif %}
+!
+!
+interface {{ L2.lag.name }}
+ switchport trunk allowed vlan add {{ L2.lag.vlan }}
+!
+interface {{ L2.trans_1.name }}
+ switchport trunk allowed vlan add {{ L2.trans_1.vlan }}
+!
+interface {{ L2.trans_2.name }}
+ switchport trunk allowed vlan add {{ L2.trans_2.vlan }}
+!
+!
+interface Vlan{{ L3.trans_1.name }}
+ description guestVRF Taxi-Core Transport
+ vrf forwarding {{ vrfs.name }}
+ {% if inventory_hostname == groups['4500-routers'][0] -%}
+ ip address {{ L3.trans_1.r1_ip }} {{ L3.trans_1.mask }}
+ {% else -%}
+ ip address {{ L3.trans_1.r2_ip }} {{ L3.trans_1.mask }}
+ {% endif -%}
+ no ip redirects
+ ip pim sparse-mode
+ no shutdown
+!
+interface Vlan{{ L3.trans_2.name }}
+ description guestVRF OPS-Core Transport
+ vrf forwarding {{ vrfs.name }}
+ {% if inventory_hostname == groups['4500-routers'][0] -%}
+ ip address {{ L3.trans_2.r1_ip }} {{ L3.trans_2.mask }}
+ {% else -%}
+ ip address {{ L3.trans_2.r2_ip }} {{ L3.trans_2.mask }}
+ {% endif -%}
+ no ip redirects
+ ip pim sparse-mode
+ no shutdown
+!
+!
+interface Vlan{{ L3.vrf_lan.name }}
+ description {{ vrfs.name }}
+ vrf forwarding {{ vrfs.name }}
+ {% if inventory_hostname == groups['4500-routers'][0] -%}
+ ip address {{ L3.vrf_lan.r1_ip }} {{ L3.vrf_lan.mask }}
+ {% else -%}
+ ip address {{ L3.vrf_lan.r2_ip }} {{ L3.vrf_lan.mask }}
+ {% endif -%}
+ ip helper-address 10.200.123.80
+ ip helper-address 10.3.122.23
+ no ip redirects
+ ip pim sparse-mode
+ standby version 2
+ standby {{ fhrp.HSRP.group }} ip {{ fhrp.HSRP.gw_ip }}
+ standby {{ fhrp.HSRP.group }} timers 1 3
+{% if inventory_hostname == groups['4500-routers'][0] %}
+ standby {{ fhrp.HSRP.group }} priority 110
+ standby {{ fhrp.HSRP.group }} preempt
+{% endif %}
+ no shutdown
+!
+!
+router ospf {{ L2.lag.vlan }} vrf {{ vrfs.name }}
+ {% if inventory_hostname == groups['4500-routers'][0] -%}
+ router-id {{ L3.vrf_lan.r1_ip }}
+ {% else -%}
+ router-id {{ L3.vrf_lan.r2_ip }}
+ {% endif -%}
+ auto-cost reference-bandwidth 100000
+ capability vrf-lite
+ {% for network in routing.ospf.networks -%}
+ network {{ network.network }} {{ network.mask }} area {{ network.area }}
+ {% endfor -%}
+ area {{ ospf_vrf_area }} range {{ ospf_summary.network }} {{ ospf_summary.mask }}
+!
+!
+#}
