@@ -28,6 +28,31 @@ interface {{ vrf.routers.lag.name }}
  switchport trunk allowed vlan add {{ vrf.routers.lag.vlan }}
 !
 !
+interface Vlan{{ vrf.routers.trans_1.vlan }}
+ description {{ vrf.name }} {{ vrf.routers.trans_1.description }}
+ vrf forwarding {{ vrf.name }}
+ {% if inventory_hostname == router_1.hostname -%}
+ ip address {{ vrf.routers.trans_1.r1_ip }} {{ vrf.routers.trans_1.mask }}
+ {% else -%}
+ ip address {{ vrf.routers.trans_1.r2_ip }} {{ vrf.routers.trans_1.mask }}
+ {% endif -%}
+ no ip redirects
+ ip pim sparse-mode
+ no shutdown
+!
+interface Vlan{{ vrf.routers.trans_2.vlan }}
+ description {{ vrf.name }} {{ vrf.routers.trans_2.description }}
+ vrf forwarding {{ vrf.name }}
+ {% if inventory_hostname == router_1.hostname -%}
+ ip address {{ vrf.routers.trans_2.r1_ip }} {{ vrf.routers.trans_2.mask }}
+ {% else -%}
+ ip address {{ vrf.routers.trans_2.r2_ip }} {{ vrf.routers.trans_2.mask }}
+ {% endif -%}
+ no ip redirects
+ ip pim sparse-mode
+ no shutdown
+!
+!
 !
 !
 {% endfor %}

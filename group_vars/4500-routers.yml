@@ -13,47 +13,65 @@ router_2:
 vrfs:
   - name: "guestVRF"
     vlans:
-      - id: "1740"
+      - id: 1740
         name: "guestVRF"
-      - id: "1741" 
+      - id: 1741 
         name: "TX-COR Transport guestVRF"
-      - id: "1742"
+      - id: 1742
         name: "OPS-COR Transport guestVRF"
     routers:
       lag:
         name: "Port-channel1"
-        vlan: "1740"
+        description: "LAN Network"
+        vlan: 1740
         r1_ip: 10.174.20.2
         r2_ip: 10.174.20.3
         mask: 255.255.252.0
       trans_1:
         name: TenGigabitEthernet1/3
+        description: "Taxi-Core Transport"
         vlan: 1741
+        r1_ip: 10.175.255.174
+        r2_ip: 10.175.255.170
+        mask: 255.255.255.252
       trans_2:
         name: TenGigabitEthernet1/4
+        description: "OPS-Core Transport"
         vlan: 1742
+        r1_ip: 10.175.255.166
+        r2_ip: 10.175.255.162
+        mask: 255.255.255.252
 
   - name: "GPLA_VRF"
     vlans:
-      - id: "1800"
+      - id: 1800
         name: "guestVRF"
-      - id: "1801"
+      - id: 1801
         name: "TX-COR Transport GPLA_VRF"
-      - id: "1802"
+      - id: 1802
         name: "OPS-COR Transport GPLA_VRF"
     routers:
       lag:
         name: "Port-channel1"
-        vlan: "1800"
+        description: "LAN Network"
+        vlan: 1800
         r1_ip: 10.180.20.2
         r2_ip: 10.180.20.3
         mask: 255.255.252.0
       trans_1:
         name: TenGigabitEthernet1/3
+        description: "Lan Network"
         vlan: 1801
+        r1_ip: 10.181.255.174
+        r2_ip: 10.181.255.170
+        mask: 255.255.255.252
       trans_2:
         name: TenGigabitEthernet1/4
+        description: "OPS-Core Transport"
         vlan: 1802
+        r1_ip: 10.181.255.166
+        r2_ip: 10.181.255.162
+        mask: 255.255.255.252
              
 # List if VRF(s) to define
 #vrfs:
