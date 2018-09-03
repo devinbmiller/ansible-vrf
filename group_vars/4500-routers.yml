@@ -1,6 +1,15 @@
 ---
 # This file contains variables that should be shared across 4500x Routers
- 
+
+# This is for variables specific to each router.
+# Please make sure the hostnames here match the hostanmes used in inventory
+router_1:
+  hostname: AB0011-TR01-DST-4K1
+  STP_priority: 24576
+router_2:
+  hostname: AB0011-TR01-DST-4K2
+  STP_priority: 28672
+
 vrfs:
   - name: "guestVRF"
     vlans:
@@ -10,11 +19,20 @@ vrfs:
         name: "TX-COR Transport guestVRF"
       - id: "1742"
         name: "OPS-COR Transport guestVRF"
-    router_1:
+    routers:
       lag:
         name: "Port-channel1"
-        vlan: "1740"    
-        
+        vlan: "1740"
+        r1_ip: 10.174.20.2
+        r2_ip: 10.174.20.3
+        mask: 255.255.252.0
+      trans_1:
+        name: TenGigabitEthernet1/3
+        vlan: 1741
+      trans_2:
+        name: TenGigabitEthernet1/4
+        vlan: 1742
+
   - name: "GPLA_VRF"
     vlans:
       - id: "1800"
@@ -23,18 +41,20 @@ vrfs:
         name: "TX-COR Transport GPLA_VRF"
       - id: "1802"
         name: "OPS-COR Transport GPLA_VRF"
-    router_1:
+    routers:
       lag:
         name: "Port-channel1"
         vlan: "1800"
-           
-router_1:
-  hostname: AB0011-TR01-DST-4K1
-  STP_priority: 24576
-router_2:
-  hostname: AB0011-TR01-DST-4K2
-  STP_priority: 28672  
-  
+        r1_ip: 10.180.20.2
+        r2_ip: 10.180.20.3
+        mask: 255.255.252.0
+      trans_1:
+        name: TenGigabitEthernet1/3
+        vlan: 1801
+      trans_2:
+        name: TenGigabitEthernet1/4
+        vlan: 1802
+             
 # List if VRF(s) to define
 #vrfs:
   #  name: "guestVRF"

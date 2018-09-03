@@ -12,14 +12,23 @@ vlan {{ vlan.id }}
 {% endfor %}
 !
 {% if inventory_hostname == router_1.hostname %}
-spanning-tree vlan {{ vrf.router_1.lag.vlan }} priority {{ router_1.STP_priority }}
+spanning-tree vlan {{ vrf.routers.lag.vlan }} priority {{ router_1.STP_priority }}
+!
 {% else %}
-spanning-tree vlan {{ vrf.router_1.lag.vlan }} priority {{ router_2.STP_priority }}
-{% endif %} 
+spanning-tree vlan {{ vrf.routers.lag.vlan }} priority {{ router_2.STP_priority }}
+{% endif -%} 
+!
+interface {{ vrf.routers.trans_1.name }}
+ switchport trunk allowed vlan add {{ vrf.routers.trans_1.vlan }}
+!
+interface {{ vrf.routers.trans_2.name }}
+ switchport trunk allowed vlan add {{ vrf.routers.trans_2.vlan }}
+!
+interface {{ vrf.routers.lag.name }}
+ switchport trunk allowed vlan add {{ vrf.routers.lag.vlan }}
 !
 !
-interface {{ vrf.router_1.lag.name }}
- switchport trunk allowed vlan add {{ vrf.router_1.lag.vlan }}
+!
 !
 {% endfor %}
 {# Temporary commenting out block
