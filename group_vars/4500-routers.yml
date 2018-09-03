@@ -60,7 +60,7 @@ vrfs:
         mask: 255.255.252.0
       trans_1:
         name: TenGigabitEthernet1/3
-        description: "Lan Network"
+        description: "Taxi-Core Transport"
         vlan: 1801
         r1_ip: 10.181.255.174
         r2_ip: 10.181.255.170
