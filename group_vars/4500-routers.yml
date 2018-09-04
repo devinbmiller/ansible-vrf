@@ -108,12 +108,3 @@ vrfs:
       routing:
         ospf:
           network: 10.180.20.0
-    
-# Routing/Protocol Variables  
-#ospf_vrf_area: "17420"
-#ospf_summary: { network: "10.174.20.0", mask: "{{ L3.vrf_lan.mask }}" }
-#routing:
-  #  ospf:
-    #  networks:
-      # - { network: "10.174.20.0", mask: "0.0.3.255", area: "{{ ospf_vrf_area }}" }
-      # - { network: "10.175.252.0", mask: "0.0.3.255", area: "0" }
