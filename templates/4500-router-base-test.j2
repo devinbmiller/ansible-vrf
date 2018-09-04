@@ -38,7 +38,7 @@ interface Vlan{{ vrf.routers.trans_1.vlan }}
  {% endif -%}
  no ip redirects
  ip pim sparse-mode
- no shutdown
+ ip ospf {{ vrf.routers.lag.vlan }} area {{ vrf.routers.trans_1.ospf_area }}
 !
 interface Vlan{{ vrf.routers.trans_2.vlan }}
  description {{ vrf.name }} {{ vrf.routers.trans_2.description }}
@@ -50,7 +50,7 @@ interface Vlan{{ vrf.routers.trans_2.vlan }}
  {% endif -%}
  no ip redirects
  ip pim sparse-mode
- no shutdown
+ ip ospf {{ vrf.routers.lag.vlan }} area {{ vrf.routers.trans_2.ospf_area }}
 !
 interface Vlan{{ vrf.routers.lag.vlan }}
  description {{ vrf.name }} {{ vrf.routers.lag.description }}
@@ -74,7 +74,7 @@ interface Vlan{{ vrf.routers.lag.vlan }}
  {% endif -%}
  no ip redirects
  ip pim sparse-mode
- no shutdown
+ ip ospf {{ vrf.routers.lag.vlan }} area {{ vrf.routers.lag.ospf_area }}
 !
 !
 router ospf {{ vrf.routers.lag.vlan }} vrf {{ vrf.name }}
@@ -85,6 +85,7 @@ router ospf {{ vrf.routers.lag.vlan }} vrf {{ vrf.name }}
  {% endif -%}
  auto-cost reference-bandwidth 100000
  capability vrf-lite
+ area {{ vrf.routers.lag.ospf_area }} range {{ vrf.routers.routing.ospf.network }} {{ vrf.routers.lag.mask }}
 !
 !
 !

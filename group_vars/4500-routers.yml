@@ -38,6 +38,7 @@ vrfs:
         glbp:
           group: 1740
           gw_ip: 10.174.20.1
+        ospf_area: 17420
       trans_1:
         name: TenGigabitEthernet1/3
         description: "Taxi-Core Transport"
@@ -45,6 +46,7 @@ vrfs:
         r1_ip: 10.175.255.174
         r2_ip: 10.175.255.170
         mask: 255.255.255.252
+        ospf_area: 0
       trans_2:
         name: TenGigabitEthernet1/4
         description: "OPS-Core Transport"
@@ -52,9 +54,10 @@ vrfs:
         r1_ip: 10.175.255.166
         r2_ip: 10.175.255.162
         mask: 255.255.255.252
+        ospf_area: 0
       routing:
         ospf:
-          area: 17420
+          network: 10.174.20.0
 
 #################################################################################################
 
@@ -85,6 +88,7 @@ vrfs:
         glbp:
           group: 1800
           gw_ip: 10.180.20.1
+        ospf_area: 18020
       trans_1:
         name: TenGigabitEthernet1/3
         description: "Taxi-Core Transport"
@@ -92,6 +96,7 @@ vrfs:
         r1_ip: 10.181.255.174
         r2_ip: 10.181.255.170
         mask: 255.255.255.252
+        ospf_area: 0
       trans_2:
         name: TenGigabitEthernet1/4
         description: "OPS-Core Transport"
@@ -99,10 +104,11 @@ vrfs:
         r1_ip: 10.181.255.166
         r2_ip: 10.181.255.162
         mask: 255.255.255.252
+        ospf_area: 0
       routing:
         ospf:
-          area: 18020
-             
+          network: 10.180.20.0
+    
 # Routing/Protocol Variables  
 #ospf_vrf_area: "17420"
 #ospf_summary: { network: "10.174.20.0", mask: "{{ L3.vrf_lan.mask }}" }
