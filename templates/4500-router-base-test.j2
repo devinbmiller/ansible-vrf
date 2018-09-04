@@ -77,6 +77,16 @@ interface Vlan{{ vrf.routers.lag.vlan }}
  no shutdown
 !
 !
+router ospf {{ vrf.routers.lag.vlan }} vrf {{ vrf.name }}
+ {% if inventory_hostname == router_1.hostname -%}
+ router-id {{ vrf.routers.lag.r1_ip }}
+ {% else -%}
+ router-id {{ vrf.routers.lag.r2_ip }}
+ {% endif -%}
+ auto-cost reference-bandwidth 100000
+ capability vrf-lite
+!
+!
 !
 !
 {% endfor %}
