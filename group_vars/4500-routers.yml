@@ -1,14 +1,15 @@
 ---
-# This file contains variables that should be shared across 4500x Routers
 
+##################################################################################################
 # This is for variables specific to each router.
-# Please make sure the hostnames here match the hostanmes used in inventory
+# Please make sure the hostnames here match the hostnames used in inventory
 router_1:
   hostname: AB0011-TR01-DST-4K1
   STP_priority: 24576
 router_2:
   hostname: AB0011-TR01-DST-4K2
   STP_priority: 28672
+#################################################################################################
 
 vrfs:
   - name: "guestVRF"
@@ -27,6 +28,16 @@ vrfs:
         r1_ip: 10.174.20.2
         r2_ip: 10.174.20.3
         mask: 255.255.252.0
+        helpers:
+          -  10.200.123.80
+          -  10.3.122.23
+        fhrp_type: HSRP     # Choose HSRP or GLBP and edit corresponding variables below
+        hsrp:
+          group: 1740 
+          gw_ip: 10.174.20.1
+        glbp:
+          group: 1740
+          gw_ip: 10.174.20.1
       trans_1:
         name: TenGigabitEthernet1/3
         description: "Taxi-Core Transport"
@@ -41,6 +52,8 @@ vrfs:
         r1_ip: 10.175.255.166
         r2_ip: 10.175.255.162
         mask: 255.255.255.252
+
+#################################################################################################
 
   - name: "GPLA_VRF"
     vlans:
@@ -58,6 +71,17 @@ vrfs:
         r1_ip: 10.180.20.2
         r2_ip: 10.180.20.3
         mask: 255.255.252.0
+        helpers: 
+          - 10.200.112.125
+          - 10.200.123.26
+          - 10.3.122.126
+        fhrp_type: HSRP     # Choose HSRP or GLBP and edit corresponding variables below
+        hsrp:
+          group: 1800
+          gw_ip: 10.180.20.1
+        glbp:
+          group: 1800
+          gw_ip: 10.180.20.1
       trans_1:
         name: TenGigabitEthernet1/3
         description: "Taxi-Core Transport"
@@ -73,33 +97,6 @@ vrfs:
         r2_ip: 10.181.255.162
         mask: 255.255.255.252
              
-# List if VRF(s) to define
-#vrfs:
-  #  name: "guestVRF"
-
-# List of VRF related VLANS to create
-#vlans:
-  #  - { id: "1740", name: "guestVRF" }
-  # - { id: "1741", name: "TX-COR Transport guestVRF "}
-  #- { id: "1742", name: "OPS-COR Transport guestVRF" }
-
-# L2 Interfaces
-#L2:
-  #  lag: { name: "Port-channel1", vlan: "1740" }
-  # trans_1: { name: "TenGigabitEthernet1/3", vlan: "1741" }
-  #trans_2: { name: "TenGigabitEthernet1/4", vlan: "1742" }
-
-# L3 SVI Interfaces
-#L3:
-  #  vrf_lan: { name: "{{ L2.lag.vlan }}", r1_ip: "10.174.20.2", r2_ip: "10.174.20.3", mask: "255.255.252.0" }
-  #trans_1: { name: "{{ L2.trans_1.vlan }}", r1_ip: "10.175.255.174", r2_ip: "10.175.255.170", mask: "255.255.255.252" }
-  #trans_2: { name: "{{ L2.trans_2.vlan }}", r1_ip: "10.175.255.166", r2_ip: "10.175.255.162", mask: "255.255.255.252" }
-
-# First-Hop-Redundancy Protocol Variables  
-#fhrp:
-  #  HSRP: { group: "1740", gw_ip: "10.174.20.1", priority: "110" }
-  #GLBP: { group: "1740", gw_ip: "10.174.84.1" }   # picking between different FHRP in future
-
 # Routing/Protocol Variables  
 #ospf_vrf_area: "17420"
 #ospf_summary: { network: "10.174.20.0", mask: "{{ L3.vrf_lan.mask }}" }
