@@ -1,16 +1,5 @@
 ---
 
-##################################################################################################
-# This is for variables specific to each router.
-# Please make sure the hostnames here match the hostnames used in inventory
-router_1:
-  hostname: AB0011-TR01-DST-4K1
-  STP_priority: 24576
-router_2:
-  hostname: AB0011-TR01-DST-4K2
-  STP_priority: 28672
-#################################################################################################
-
 vrfs:
   - name: "guestVRF"
     vlans:
