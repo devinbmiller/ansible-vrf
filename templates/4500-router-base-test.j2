@@ -63,7 +63,7 @@ interface Vlan{{ vrf.routers.lag.vlan }}
  {%- for ip in vrf.routers.lag.helpers -%}
  ip helper-address {{ ip }}
  {% endfor -%}
- {% if vrf.routers.lag.fhrp_type == "HSRP" -%}
+ {% if vrf.routers.lag.fhrp_type.upper() == "HSRP" -%}
  standby version 2
  standby {{ vrf.routers.lag.hsrp.group }} ip {{ vrf.routers.lag.hsrp.gw_ip }}
  standby {{ vrf.routers.lag.hsrp.group }} timers 1 3
