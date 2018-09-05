@@ -6,8 +6,8 @@ router2
 
 [4500-routers]
 # NOTE: Each host should end in either a 1 or 2 to identify it as router1 or router2
-AB0011-TR01-DST-4K1
-AB0011-TR01-DST-4K2
+R2013A-TR21-DST-4K1
+R2013A-TR21-DST-4K2
 
 [ios:children]
 2911-router

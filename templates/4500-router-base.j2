@@ -39,6 +39,7 @@ interface Vlan{{ vrf.routers.trans_1.vlan }}
  no ip redirects
  ip pim sparse-mode
  ip ospf {{ vrf.routers.lag.vlan }} area {{ vrf.routers.trans_1.ospf_area }}
+ no shutdown
 !
 interface Vlan{{ vrf.routers.trans_2.vlan }}
  description {{ vrf.name }} {{ vrf.routers.trans_2.description }}
@@ -51,6 +52,7 @@ interface Vlan{{ vrf.routers.trans_2.vlan }}
  no ip redirects
  ip pim sparse-mode
  ip ospf {{ vrf.routers.lag.vlan }} area {{ vrf.routers.trans_2.ospf_area }}
+ no shutdown
 !
 interface Vlan{{ vrf.routers.lag.vlan }}
  description {{ vrf.name }} {{ vrf.routers.lag.description }}
@@ -75,6 +77,7 @@ interface Vlan{{ vrf.routers.lag.vlan }}
  no ip redirects
  ip pim sparse-mode
  ip ospf {{ vrf.routers.lag.vlan }} area {{ vrf.routers.lag.ospf_area }}
+ no shutdown
 !
 !
 router ospf {{ vrf.routers.lag.vlan }} vrf {{ vrf.name }}
