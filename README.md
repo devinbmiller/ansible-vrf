@@ -16,12 +16,14 @@
 Edit the hosts: `hosts` file
 + Under `[4500-routers]` section:
    - Add a signle host name per line for a total of two hosts
+   - Please make sure one of the hosts ends in a 1 to identify it as router 1
    - Note the tag of `build-4500`. This will be used to run only this section of the playbook later
 
 Create Config:
 1. Edit the `group_vars/4500-routers.yml` file
    + This contains variables that are shared for both 4500x switches
    + The variable names should be self-describing
+   + You can add as many VRF configurations as you wish
 2. Generate the configurations by running a task by specifying its tag (build-4500):
    + Run the command `ansible-playbook -i hosts create-config.yml --tags 'build-4500'`
 3. Configurations will be written to the `configs/` directory
