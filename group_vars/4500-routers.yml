@@ -47,6 +47,11 @@ vrfs:
       routing:
         ospf:
           network: 10.174.56.0
+      access_downlinks:
+        ranges:
+          - "TenGigabitEthernet1/5 - 9"
+        interfaces:
+          - "TenGigabitEthernet1/10"
 
 #################################################################################################
 
@@ -97,3 +102,8 @@ vrfs:
       routing:
         ospf:
           network: 10.180.56.0
+      access_downlinks:
+        ranges:
+          - "TenGigabitEthernet1/5 - 9"
+        interfaces:
+          - "TenGigabitEthernet1/10"

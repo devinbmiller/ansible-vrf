@@ -27,6 +27,16 @@ interface {{ vrf.routers.trans_2.name }}
 interface {{ vrf.routers.lag.name }}
  switchport trunk allowed vlan add {{ vrf.routers.lag.vlan }}
 !
+{% for range in vrf.routers.access_downlinks.ranges %}
+interface range {{ range }}
+ switchport trunk allowed vlan add {{ vrf.routers.lag.vlan }}
+{% endfor %}
+!
+{% for interface in vrf.routers.access_downlinks.interfaces %}
+interface {{ interface }}
+ switchport trunk allowed vlan add {{ vrf.routers.lag.vlan }}
+{% endfor %}
+!
 !
 interface Vlan{{ vrf.routers.trans_1.vlan }}
  description {{ vrf.name }} {{ vrf.routers.trans_1.description }}
