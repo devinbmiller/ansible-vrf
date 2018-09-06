@@ -20,8 +20,21 @@
 
   tasks:
   
-  - name: BUILD 4500 Router Configuration
+  - name: BUILD 4500 Router Configurations
     template:
-            src=templates/4500-router-base.j2
+      src=templates/4500-router-base.j2
       dest=configs/{{ inventory_hostname }}.conf
     tags: build-4500
+
+- name: Build Core Router VRF Sub-Interface Configurations
+  hosts: core-routers 
+  connection: local
+  gather_facts: no
+
+  tasks:
+  
+  - name: BUILD Core Routers Configurations
+    template:
+      src=templates/core-routers.j2
+      dest=configs/{{ inventory_hostname }}.conf
+    tags: build-cores

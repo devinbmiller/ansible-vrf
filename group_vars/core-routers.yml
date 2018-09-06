@@ -1,0 +1,29 @@
+---
+# This file should contain the varibles to build VRF sub-interface transports
+#
+vrfs:
+  - name: guestVRF
+    core_1:
+      interfaces:
+        - r1_trans:
+          name: Ethernet6/23
+          vlan: 1741
+          ip: 10.175.255.1
+          mask: "/30"
+        - r2_trans:
+          name: Ethernet7/23
+          vlan: 1741
+          ip: 10.175.255.5
+          mask: "/30"
+    core_2:
+      interfaces:
+        - r1_trans:
+          name: Ethernet6/23
+          vlan: 1742
+          ip: 10.175.255.9
+          mask: "/30"
+        - r2_trans:
+          name: Ethernet7/23
+          vlan: 1742
+          ip: 10.175.255.13
+          mask: "/30"

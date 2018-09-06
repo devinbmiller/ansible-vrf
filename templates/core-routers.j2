@@ -1,0 +1,17 @@
+{% for vrf in vrfs %}
+
+{%- for interface in vrf.core_1.interfaces -%}
+{{interface.name}}.{{interface.vlan }}
+ description {{ vrf.name }} Transport
+ encapsulation dot1q {{ interface.vlan }}
+ vrf member {{ vrf.name }}
+ ip address {{ interface.ip }}{{ interface.mask }}
+ no ip ospf passive-interface
+ ip router ospf 1 area 0.0.0.0
+ ip pim sparse-mode
+ no shutdown
+!
+!
+{% endfor %}
+
+{% endfor %}

@@ -1,13 +1,17 @@
+[4500-routers]
+# NOTE: Each host should end in either a 1 or 2 to identify it as router1 or router2
+R2013A-TR21-DST-4K1
+R2013A-TR21-DST-4K2
+
+[core-routers]
+TX-COR-7K1
+#OPS-COR-7K1
+
 [2911-router]
 # DO NOT CHANGE THESE NAMES
 # You may comment out router2 in single router delpoyment to prevent its config from being generated
 router1
 router2
-
-[4500-routers]
-# NOTE: Each host should end in either a 1 or 2 to identify it as router1 or router2
-R2013A-TR21-DST-4K1
-R2013A-TR21-DST-4K2
 
 [ios:children]
 2911-router
