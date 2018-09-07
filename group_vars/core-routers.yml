@@ -45,11 +45,11 @@ vrfs:
       interfaces:
         - r1_trans:
           name: Ethernet6/23
-          vlan: 1801
+          vlan: 1802
           ip: 10.181.255.9
           mask: "/30"
         - r2_trans:
           name: Ethernet7/23
-          vlan: 1801
+          vlan: 1802
           ip: 10.181.255.13
           mask: "/30"
