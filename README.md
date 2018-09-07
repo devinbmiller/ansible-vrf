@@ -54,12 +54,11 @@ Create Config:
 3. Configurations will be written to the `configs/` directory
    + Check configurations for accuracy
    + Follow normal workflow for deploying them to routers
-
+   + Previous configurations will be backed up if they already exist before new ones are generated
 ---
 ### Assumptions/Caveats: ###
 1. This will generate vrf configurations in `configs/ `for one or two 2911 router deployments or two 4500x switch scenarios
 2. In a single router scenario, if you do not uncomment `router2` from the `hosts` file, a second configuration file will be generated in `configs/` but can be deleted or ignored
-3. If you do not change the `router_name` variables for each router then previous configuration outputs might be overwritten
 ---
 ### Warning: ###
 + These scripts will NOT check to make sure you entered the correct or accurate values for the variables.
