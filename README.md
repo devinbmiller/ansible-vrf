@@ -22,6 +22,7 @@ Edit the hosts: `hosts` file
 + Under `[core-routers]` Section:
    - Add entry for each core router.
    - The template requires that 'TX' or 'OPS' be in each hostname  
+
 Create Config:
 1. Edit the `group_vars/4500-routers.yml` file
    + This contains variables that are shared for both 4500x switches
