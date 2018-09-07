@@ -35,6 +35,7 @@ Create Config:
 4. Configurations will be written to the `configs/` directory
    + Check configurations for accuracy
    + Follow normal workflow for deploying them to routers
+   + Previous configurations will be backed up if they already exist before new ones are generated
 
 #### 2911 Routers ####
 Edit the hosts: `hosts` file
