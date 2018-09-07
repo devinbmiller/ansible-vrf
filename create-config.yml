@@ -9,8 +9,9 @@
 
   - name: BUILD 2911 Router Configuration
     template:
-      src=templates/2911-router-base.j2
-      dest=configs/{{ inventory_hostname }}.conf
+      src: templates/2911-router-base.j2
+      dest: configs/{{ inventory_hostname }}.conf
+      backup: yes
     tags: build-2911
   
 - name: Build 4500 VRF Configurations
@@ -20,10 +21,11 @@
 
   tasks:
   
-  - name: BUILD 4500 Router Configurations
+  - name: Build 4500 Router Configurations
     template:
-      src=templates/4500-router-base.j2
-      dest=configs/{{ inventory_hostname }}.conf
+      src: templates/4500-router-base.j2
+      dest: configs/{{ inventory_hostname }}.conf
+      backup: yes
     tags: build-4500
 
 - name: Build Core Router VRF Sub-Interface Configurations
@@ -35,6 +37,7 @@
   
   - name: BUILD Core Routers Configurations
     template:
-      src=templates/core-routers.j2
-      dest=configs/{{ inventory_hostname }}.conf
-    tags: build-cores
+      src: templates/core-routers.j2
+      dest: configs/{{ inventory_hostname }}.conf
+      backup: yes
+    tags: build-cores, build-4500
