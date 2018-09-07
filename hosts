@@ -4,6 +4,7 @@ R2013A-TR21-DST-4K1
 R2013A-TR21-DST-4K2
 
 [core-routers]
+# NOTE One host should have 'TX' in its name and the other 'OPS'
 TX-COR-7K1
 OPS-COR-7K1
 
@@ -12,7 +13,3 @@ OPS-COR-7K1
 # You may comment out router2 in single router delpoyment to prevent its config from being generated
 router1
 router2
-
-[ios:children]
-2911-router
-4500-routers

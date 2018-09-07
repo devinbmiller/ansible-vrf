@@ -1,19 +1,4 @@
 ---
-
-- name: Build 2911 VRF Configurations
-  hosts: 2911-router
-  connection: local
-  gather_facts: no
-
-  tasks:
-
-  - name: BUILD 2911 Router Configuration
-    template:
-      src: templates/2911-router-base.j2
-      dest: configs/{{ inventory_hostname }}.conf
-      backup: yes
-    tags: build-2911
-  
 - name: Build 4500 VRF Configurations
   hosts: 4500-routers 
   connection: local
@@ -41,3 +26,20 @@
       dest: configs/{{ inventory_hostname }}.conf
       backup: yes
     tags: build-cores, build-4500
+
+#############################################################################
+
+- name: Build 2911 VRF Configurations
+  hosts: 2911-router
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+  - name: BUILD 2911 Router Configuration
+    template:
+      src: templates/2911-router-base.j2
+      dest: configs/{{ inventory_hostname }}.conf
+      backup: yes
+    tags: build-2911
+

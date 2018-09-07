@@ -30,11 +30,9 @@ Create Config:
 2. Edit the `group_vars/core-routers.yml` file
    + This contants the variables used to generate one or more VRF configurations per core router
    + The variable names should be self-describing
-3. Generate the 4500x configurations  by specifying its tag (build-4500):
+3. Generate the 4500x and Core router configurations by specifying its tag (build-4500):
    + Run the command `ansible-playbook -i hosts create-config.yml --tags 'build-4500'`
-4. Generate the core router configurations by specifying its tag (build-cores):
-   + Run the command `ansible-playbook -i hosts create-config.yml --tags 'build-cores'`
-5. Configurations will be written to the `configs/` directory
+4. Configurations will be written to the `configs/` directory
    + Check configurations for accuracy
    + Follow normal workflow for deploying them to routers
 
