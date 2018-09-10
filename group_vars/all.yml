@@ -1,0 +1,8 @@
+---
+## This will contain variables that are accessable to ALL hosts
+
+# These will be used for various authentication methods.  These should be stored in a vault file
+username: "{{ vault_username }}"
+password: "{{ vault_password }}"
+access_enable_secret: "{{ vault_access_enable_secret }}"
+distro_enable_secret: "{{ vault_distro_enable_secret }}"
