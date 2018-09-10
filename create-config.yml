@@ -9,7 +9,7 @@
   - name: Build 4500 Router Configurations
     template:
       src: templates/4500-router-base.j2
-      dest: configs/{{ inventory_hostname }}.conf
+      dest: configs/{{ inventory_hostname }}-config.txt
       backup: yes
     tags: build-4500
 
@@ -23,7 +23,7 @@
   - name: BUILD Core Routers Configurations
     template:
       src: templates/core-routers.j2
-      dest: configs/{{ inventory_hostname }}.conf
+      dest: configs/{{ inventory_hostname }}-config.txt
       backup: yes
     tags: build-cores, build-4500
 
@@ -39,7 +39,7 @@
   - name: BUILD 2911 Router Configuration
     template:
       src: templates/2911-router-base.j2
-      dest: configs/{{ inventory_hostname }}.conf
+      dest: configs/{{ inventory_hostname }}-config.txt
       backup: yes
     tags: build-2911
 
