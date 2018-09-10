@@ -1,11 +1,12 @@
 ### This playbook currently supports builing VRF configurations for: ###
-+ Cisco 4500x Switches (Non-Sub-Interface Method)
-   - Core Router Sub-Interfaces if desired
-+ Cisco 2911 Routers
++ Cisco 4500x switches (non-sub-interface method)
++ Cisco core router sub-interface VRF transports
++ Cisco access switch VRF vlans and transports
++ Cisco 2911 routers
 ---
 ### Initial Setup ###
 + [Github Repository](https://github.com/devinbmiller/ansible-vrf)
-1. Create directory in your home directory on the jumphost or Ansible host of your choice. ex. `mkdir ansible`
+1. Create a directory in your home directory on the jumphost or Ansible host of your choice. ex. `mkdir ansible`
 2. Change to newly created directory and clone from the remote repository
    + `cd ansible`
    + `git clone https://github.com/devinbmiller/ansible-vrf.git vrf_config`
@@ -16,28 +17,54 @@
 #### 4500x Switches ####
 Edit the hosts: `hosts` file
 + Under `[4500-routers]` section:
-   - Add a signle host name per line for a total of two hosts
+   - Add a single entry for each 4500 router
    - Please make sure one of the hosts ends in a 1 to identify it as router 1
-   - Note the tag of `build-4500`. This will be used to run only this section of the playbook later
-+ Under `[core-routers]` Section:
-   - Add entry for each core router.
-   - The template requires that 'TX' or 'OPS' be in each hostname  
-
-Create Config:
+   
+Create Configs:
 1. Edit the `group_vars/4500-routers.yml` file
    + This contains variables that are shared for both 4500x switches
    + The variable names should be self-describing
    + You can add as many VRF configurations as you wish
-2. Edit the `group_vars/core-routers.yml` file
-   + This contants the variables used to generate one or more VRF configurations per core router
-   + The variable names should be self-describing
-3. Generate the 4500x and Core router configurations by specifying its tag (build-4500):
+2. Generate the 4500x router configurations by specifying its tag (build-4500):
    + Run the command `ansible-playbook -i hosts create-config.yml --tags 'build-4500'`
-4. Configurations will be written to the `configs/` directory
+3. Configurations will be written to the `configs/` directory
+   + Check configurations for accuracy
+   + Follow normal workflow for deploying them to routers
+   + Previous configurations will be backed up if they already exist before new, changed ones are generated
+
+#### Core Router Sub-Interface VRF Transport Configurations ####
+Edit the hosts: `hosts` file
++ Under `[core-routers]` section:
+   - Add entry for each core router.
+   - The template requires that 'TX' or 'OPS' be in each hostname
+
+Create Configs:
+1. Edit the `group_vars/core-routers.yml` file
+   + This contains the variables used to generate one or more VRF sub-interface configurations per core router
+   + The variable names should be self-describing
+2. Generate the Core router configurations by specifying its tag (build-cores):
+   + Run the command `ansible-playbook -i hosts create-config.yml --tags 'build-cores'`
+3. Configurations will be written to the `configs/` directory
    + Check configurations for accuracy
    + Follow normal workflow for deploying them to routers
    + Previous configurations will be backed up if they already exist before new ones are generated
 
+#### Access Switch VRF Configurations ####
+Edit the hosts: `hosts` file
++ Under `[access-switches]` section:
+   - Add entry for each access-switch.
+
+Create Configs:
+1. Edit the `group_vars/access-switches.yml` file
+   + This contains the variables used to generate one or more VRF configurations per access switch
+   + The variable names should be self-describing
+2. Generate the access switch configurations by specifying its tag (build-access):
+   + Run the command `ansible-playbook -i hosts create-config.yml --tags 'build-access'`
+3. Configurations will be written to the `configs/` directory
+   + Check configurations for accuracy
+   + Follow normal workflow for deploying them to routers
+   + Previous configurations will be backed up if they already exist before new ones are generated
+  
 #### 2911 Routers ####
 Edit the hosts: `hosts` file
 + Under `[2911-router]` section:
