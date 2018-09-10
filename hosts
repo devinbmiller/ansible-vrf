@@ -8,8 +8,16 @@ R2013A-TR21-DST-4K2
 TX-COR-7K1
 OPS-COR-7K1
 
+[access-switches]
+R2013A-TR21-ACC-37K1
+R2013A-TR21-ACC-37K2
+
 [2911-router]
 # DO NOT CHANGE THESE NAMES
 # You may comment out router2 in single router delpoyment to prevent its config from being generated
 router1
 router2
+
+[vault_creds:children]
+#4500-routers
+#core-routers
