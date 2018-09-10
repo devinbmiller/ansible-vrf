@@ -1,0 +1,10 @@
+---
+vlans:
+  - id: 1780
+    name: guestVRF
+  - id: 1800
+    name: GPLA_VRF
+
+uplink_interfaces:
+  - TenGigabitEthernet1/1/1
+  - TenGigabitEthernet2/1/1
