@@ -1,2 +1,3 @@
 configs/*.conf
 configs/*.txt
+vault_creds.yml
