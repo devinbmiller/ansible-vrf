@@ -1,13 +1,14 @@
 [4500-routers]
 # NOTE: Each host should end in either a 1 or 2 to identify it as router1 or router2
+A1106-DST-4K1 ansible_host=10.30.255.3
+A1106-DST-4K2 ansible_host=10.30.255.4
 
 [core-routers]
 # NOTE One host should have 'TX' in its name and the other 'OPS'
-TX-COR-7K1
-OPS-COR-7K1
+TX-COR-7K1 ansible_host=10.5.255.1
+OPS-COR-7K1 ansible_host=10.0.255.1
 
 [access-switches]
-515EastMain-Flr2-TEST-93K1 ansible_host=10.110.16.20
 
 [2911-router]
 # DO NOT CHANGE THESE NAMES
