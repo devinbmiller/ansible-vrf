@@ -6,50 +6,50 @@ vrfs:
     core_1:
       interfaces:
         - r1_trans:
-          name: Ethernet6/23
+          name: Ethernet5/19
           vlan: 1741
-          ip: 10.175.255.1
+          ip: 10.175.255.189
           mask: "/30"
         - r2_trans:
-          name: Ethernet7/23
+          name: Ethernet7/19
           vlan: 1741
-          ip: 10.175.255.5
+          ip: 10.175.255.185
           mask: "/30"
     core_2:
       interfaces:
         - r1_trans:
-          name: Ethernet6/23
+          name: Ethernet5/19
           vlan: 1742
-          ip: 10.175.255.9
+          ip: 10.175.255.181
           mask: "/30"
         - r2_trans:
-          name: Ethernet7/23
+          name: Ethernet6/19
           vlan: 1742
-          ip: 10.175.255.13
+          ip: 10.175.255.177
           mask: "/30"
 ##########################################################################          
   - name: GPLA_VRF
     core_1:
       interfaces:
         - r1_trans:
-          name: Ethernet6/23
+          name: Ethernet5/19
           vlan: 1801
-          ip: 10.181.255.1
+          ip: 10.181.255.189
           mask: "/30"
         - r2_trans:
-          name: Ethernet7/23
+          name: Ethernet7/19
           vlan: 1801
-          ip: 10.181.255.5
+          ip: 10.181.255.185
           mask: "/30"
     core_2:
       interfaces:
         - r1_trans:
-          name: Ethernet6/23
+          name: Ethernet5/19
           vlan: 1802
-          ip: 10.181.255.9
+          ip: 10.181.255.181
           mask: "/30"
         - r2_trans:
-          name: Ethernet7/23
+          name: Ethernet6/19
           vlan: 1802
-          ip: 10.181.255.13
+          ip: 10.181.255.177
           mask: "/30"

@@ -1,6 +1,6 @@
 ---
 - name: NAPALM Merge Config
-  hosts: A1106-DST-4K1 
+  hosts: access-switches 
   connection: local
   gather_facts: no
   
@@ -12,9 +12,9 @@
         password: "{{ password }}"
         dev_os: "{{ os }}"
         optional_args:
-          secret: "{{ distro_enable_secret }}"
+          secret: "{{ access_enable_secret }}"
         config_file: "configs/{{ inventory_hostname }}-config.txt"
-        commit_changes: False     # Set to True to actually commit the changes. False means just get diffs
+        commit_changes: False    # Set to True to actually commit the changes. False means just get diffs
         diff_file: "diffs/{{ inventory_hostname }}-diff.txt"
         archive_file: "backups/{{ inventory_hostname }}-backup.txt"
       register: results
