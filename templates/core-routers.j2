@@ -3,7 +3,7 @@
 {%- if 'TX' in inventory_hostname %}
 {%- for interface in vrf.core_1.interfaces -%}
 
-{{interface.name}}.{{interface.vlan }}
+interface {{interface.name}}.{{interface.vlan }}
  description {{ vrf.name }} Transport
  encapsulation dot1q {{ interface.vlan }}
  vrf member {{ vrf.name }}
@@ -19,7 +19,7 @@
 {% elif 'OPS' in inventory_hostname %}
 {%- for interface in vrf.core_2.interfaces -%}
 
-{{interface.name}}.{{interface.vlan }}
+interface {{interface.name}}.{{interface.vlan }}
  description {{ vrf.name }} Transport
  encapsulation dot1q {{ interface.vlan }}
  vrf member {{ vrf.name }}
