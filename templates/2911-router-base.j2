@@ -21,3 +21,6 @@ router ospf {{vrf_vlan}} vrf {{ vrf_name }}
 {% for item in ospf.networks %}
  network {{ item.network }} {{ item.wildcard_mask }} area {{ item.area }}
 {% endfor %}
+!
+!
+end
