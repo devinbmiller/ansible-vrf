@@ -1,10 +1,11 @@
 ---
 vlans:
-  - id: 1780
+  - id: 1740
     name: guestVRF
   - id: 1800
     name: GPLA_VRF
 
 uplink_interfaces:
   - TenGigabitEthernet1/1/1
+  - TenGigabitEthernet1/1/2
   - TenGigabitEthernet2/1/1
