@@ -8,7 +8,7 @@
   
   - name: Build 4500 Router Configurations
     template:
-      src: templates/4500-router-base.j2
+      src: templates/4500-router.j2
       dest: configs/{{ inventory_hostname }}-config.txt
       backup: yes
     tags: build-4500
