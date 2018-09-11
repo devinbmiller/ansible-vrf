@@ -34,7 +34,7 @@
 
   tasks:
   
-  - name: Build Core Routers Configurations
+  - name: Build Access-Switch Configurations
     template:
       src: templates/access-switches.j2
       dest: configs/{{ inventory_hostname }}-config.txt
