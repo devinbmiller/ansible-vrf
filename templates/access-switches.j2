@@ -1,0 +1,12 @@
+{% for vlan in vlans %}
+vlan {{ vlan.id }}
+ name {{ vlan.name }}
+!
+!
+{% for interface in uplink_interfaces %}
+interface {{ interface }}
+ switchport trunk allowed vlan add {{ vlan.id }}
+!
+{% endfor %}
+!
+{% endfor %}
