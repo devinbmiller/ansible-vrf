@@ -21,15 +21,15 @@ access-switches
 2911-router
 
 [ios:vars]
-os="ios"
+os=ios
 
 [nxos:children]
 core-routers
 
-[nxos:vars:]
-os="nxos"
+[nxos:vars]
+os=nxos
 
 [vault_creds:children]
 4500-routers
 core-routers
-access-switchesstMain-Flr2-TEST-93K1
+access-switches
