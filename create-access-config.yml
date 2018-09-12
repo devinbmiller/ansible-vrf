@@ -1,0 +1,30 @@
+---
+- name: Build Access-Switch VLAN and Trunk Configurations
+  hosts: access-switches 
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+  - name: Gather Interface Facts Via NAPALM
+    napalm_get_facts:
+      hostname: "{{ ansible_host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      dev_os: "ios"
+      filter: "interfaces"
+    register: facts_results
+    tags: get-facts
+  
+  - name: Print Data
+    debug:
+      var: facts_results.ansible_facts.napalm_interfaces
+    tags: get-facts
+  
+  - name: Build Access-Switch Configurations
+    template:
+      src: templates/access-switches.j2
+      dest: configs/{{ inventory_hostname }}-config.txt
+      backup: yes
+    tags: build-access
+
