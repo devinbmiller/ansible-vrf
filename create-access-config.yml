@@ -11,15 +11,17 @@
       hostname: "{{ ansible_host }}"
       username: "{{ username }}"
       password: "{{ password }}"
+      optional_args:
+        secret: "{{ access_enable_secret }}"
       dev_os: "ios"
       filter: "interfaces"
     register: facts_results
     tags: get-facts
   
-  - name: Print Data
-    debug:
-      var: facts_results.ansible_facts.napalm_interfaces
-    tags: get-facts
+  #- name: Print Data
+  # debug:
+  #   var: facts_results.ansible_facts.napalm_interfaces
+  # tags: get-facts
   
   - name: Build Access-Switch Configurations
     template:
