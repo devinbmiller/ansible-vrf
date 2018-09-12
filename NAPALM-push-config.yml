@@ -1,6 +1,6 @@
 ---
 - name: NAPALM Merge Config
-  hosts: distro-switches 
+  hosts: 4500-routers 
   connection: local
   gather_facts: no
   
