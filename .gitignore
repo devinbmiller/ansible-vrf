@@ -4,3 +4,4 @@ diffs/*
 backups/*
 merged-configs/*
 vault_creds.yml
+inventory/*
