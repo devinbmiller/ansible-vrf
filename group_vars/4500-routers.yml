@@ -14,8 +14,8 @@ vrfs:
         name: "Port-channel1"
         description: "LAN Network"
         vlan: 1740
-        r1_ip: 10.174.36.2
-        r2_ip: 10.174.36.3
+        r1_ip: 10.174.44.2
+        r2_ip: 10.174.44.3
         mask: 255.255.252.0
         helpers:
           -  10.200.123.80
@@ -23,35 +23,35 @@ vrfs:
         fhrp_type: HSRP     # Choose HSRP or GLBP and edit corresponding variables below
         hsrp:
           group: 1740 
-          gw_ip: 10.174.36.1
+          gw_ip: 10.174.44.1
         glbp:
           group: 1740
-          gw_ip: 10.174.36.1
-        ospf_area: 17436
+          gw_ip: 10.174.44.1
+        ospf_area: 17444
       trans_1:
         name: TenGigabitEthernet1/3
         description: "Taxi-Core Transport"
         vlan: 1741
-        r1_ip: 10.175.255.110
-        r2_ip: 10.175.255.106
+        r1_ip: 10.175.255.78
+        r2_ip: 10.175.255.74
         mask: 255.255.255.252
         ospf_area: 0
       trans_2:
         name: TenGigabitEthernet1/4
         description: "OPS-Core Transport"
         vlan: 1742
-        r1_ip: 10.175.255.102
-        r2_ip: 10.175.255.98
+        r1_ip: 10.175.255.70
+        r2_ip: 10.175.255.66
         mask: 255.255.255.252
         ospf_area: 0
       routing:
         ospf:
-          network: 10.174.36.0
+          network: 10.174.44.0
       access_downlinks:
         ranges:
-          - "TenGigabitEthernet1/5 - 19"
+          - "TenGigabitEthernet1/7 - 9"
         interfaces:
-          - "TenGigabitEthernet1/20"
+          - "TenGigabitEthernet1/10"
 
 #################################################################################################
 
@@ -68,8 +68,8 @@ vrfs:
         name: "Port-channel1"
         description: "LAN Network"
         vlan: 1800
-        r1_ip: 10.180.36.2
-        r2_ip: 10.180.36.3
+        r1_ip: 10.180.44.2
+        r2_ip: 10.180.44.3
         mask: 255.255.252.0
         helpers: 
           - 10.200.112.125
@@ -78,32 +78,32 @@ vrfs:
         fhrp_type: HSRP     # Choose HSRP or GLBP and edit corresponding variables below
         hsrp:
           group: 1800
-          gw_ip: 10.180.36.1
+          gw_ip: 10.180.44.1
         glbp:
           group: 1800
-          gw_ip: 10.180.36.1
-        ospf_area: 18036
+          gw_ip: 10.180.44.1
+        ospf_area: 18044
       trans_1:
         name: TenGigabitEthernet1/3
         description: "Taxi-Core Transport"
         vlan: 1801
-        r1_ip: 10.181.255.110
-        r2_ip: 10.181.255.106
+        r1_ip: 10.181.255.78
+        r2_ip: 10.181.255.74
         mask: 255.255.255.252
         ospf_area: 0
       trans_2:
         name: TenGigabitEthernet1/4
         description: "OPS-Core Transport"
         vlan: 1802
-        r1_ip: 10.181.255.102
-        r2_ip: 10.181.255.98
+        r1_ip: 10.181.255.70
+        r2_ip: 10.181.255.66
         mask: 255.255.255.252
         ospf_area: 0
       routing:
         ospf:
-          network: 10.180.56.0
+          network: 10.180.44.0
       access_downlinks:
         ranges:
-          - "TenGigabitEthernet1/5 - 19"
+          - "TenGigabitEthernet1/7 - 9"
         interfaces:
-          - "TenGigabitEthernet1/20"
+          - "TenGigabitEthernet1/10"
