@@ -13,8 +13,9 @@
         dev_os: "{{ os }}"
         optional_args:
           secret: "{{ access_enable_secret }}"
+          global_delay_factor: 2
         config_file: "configs/{{ inventory_hostname }}-config.txt"
-        commit_changes: False    # Set to True to actually commit the changes. False means just get diffs
+        commit_changes: True  # Set to True to actually commit the changes. False means just get diffs
         diff_file: "diffs/{{ inventory_hostname }}-diff.txt"
         archive_file: "backups/{{ inventory_hostname }}-backup.txt"
       register: results

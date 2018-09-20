@@ -1,12 +1,35 @@
+{% set switch_interfaces = facts_results.ansible_facts.napalm_interfaces %}
 {% for vlan in vlans %}
 vlan {{ vlan.id }}
  name {{ vlan.name }}
 !
 !
-{% for interface in uplink_interfaces %}
+{% for interface, values in switch_interfaces.items() %}
+{% if "Ten" in interface and values.is_up == true %}
 interface {{ interface }}
  switchport trunk allowed vlan add {{ vlan.id }}
 !
+{% elif "GigabitEthernet" and "49" in interface and values.is_up == true %}
+interface {{ interface }}
+ switchport trunk allowed vlan add {{ vlan.id }}
+!
+{% elif "GigabitEthernet" and "50" in interface and values.is_up == true %}
+interface {{ interface }}
+ switchport trunk allowed vlan add {{ vlan.id }}
+!
+{% elif "GigabitEthernet" and "51" in interface and values.is_up == true %}
+interface {{ interface }}
+ switchport trunk allowed vlan add {{ vlan.id }}
+!
+{% elif "GigabitEthernet" and "52" in interface and values.is_up == true %}
+interface {{ interface }}
+ switchport trunk allowed vlan add {{ vlan.id }}
+!
+{% elif "Port-channel" in interface and values.is_up == true %}
+interface {{ interface }}
+ switchport trunk allowed vlan add {{ vlan.id }}
+!
+{% endif %}
 {% endfor %}
 !
 {% endfor %}
