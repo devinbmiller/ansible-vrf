@@ -25,6 +25,10 @@ interface {{ interface }}
 interface {{ interface }}
  switchport trunk allowed vlan add {{ vlan.id }}
 !
+{% elif "Port-channel" in interface and values.is_up == true %}
+interface {{ interface }}
+ switchport trunk allowed vlan add {{ vlan.id }}
+!
 {% endif %}
 {% endfor %}
 !
