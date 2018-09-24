@@ -6,3 +6,11 @@ username: "{{ vault_username }}"
 password: "{{ vault_password }}"
 access_enable_secret: "{{ vault_access_enable_secret }}"
 distro_enable_secret: "{{ vault_distro_enable_secret }}"
+
+# This is for Ansible network_cli connextions
+ansible_connection: network_cli
+ansible_network_os: "{{ os }}"
+ansible_user: "{{ vault_username }}"
+ansible_ssh_pass: "{{ vault_password }}"
+ansible_become: yes
+ansible_become_method: enable
