@@ -1,0 +1,14 @@
+---
+- name: Build 4500 VRF Configurations
+  hosts: 4500-routers
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+  - name: Build 4500 Router Configurations
+    template:
+      src: templates/4500-router.j2
+      dest: configs/{{ inventory_hostname }}-config.txt
+      backup: yes
+    tags: build-4500

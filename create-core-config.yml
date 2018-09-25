@@ -1,0 +1,14 @@
+---
+- name: Build Core Router VRF Sub-Interface Configurations
+  hosts: core-routers 
+  connection: local
+  gather_facts: no
+
+  tasks:
+  
+  - name: Build Core Routers Configurations
+    template:
+      src: templates/core-routers.j2
+      dest: configs/{{ inventory_hostname }}-config.txt
+      backup: yes
+    tags: build-cores
