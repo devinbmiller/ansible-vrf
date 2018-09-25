@@ -1,0 +1,3 @@
+---
+ansible_become_pass: "{{ vault_distro_enable_secret }}"
+distro_enable_secret: "{{ vault_distro_enable_secret }}"
