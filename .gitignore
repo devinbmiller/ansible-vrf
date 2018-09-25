@@ -1,7 +1,5 @@
-configs/*.conf
 configs/*.txt
 diffs/*
 backups/*
 merged-configs/*
 vault_creds.yml
-inventory/*
