@@ -11,7 +11,7 @@ OPS-COR-7K1
 [acccess-switches]
 515EastMain-Flr2-TEST-93K1 ansible_host=10.110.16.20
 
-[2911-router]
+[2911-routers]
 # DO NOT CHANGE THESE NAMES
 # You may comment out router2 in single router delpoyment to prevent its config from being generated
 router1
@@ -20,7 +20,7 @@ router2
 [ios:children]
 4500-routers
 access-switches
-2911-router
+2911-routers
 
 [nxos:children]
 core-routers
