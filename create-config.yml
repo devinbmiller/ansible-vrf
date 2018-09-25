@@ -30,7 +30,7 @@
 #############################################################################
 
 - name: Build 2911 VRF Configurations
-  hosts: 2911-router
+  hosts: 2911-routers
   connection: local
   gather_facts: no
 
