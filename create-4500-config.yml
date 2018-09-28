@@ -6,9 +6,26 @@
 
   tasks:
 
+  - name: Gather Cisco IOS Facts
+    ios_facts:
+      gather_subset:
+        - hardware
+      #  - interfaces
+    register: facts_results
+
   - name: Build 4500 Router Configurations
     template:
       src: templates/4500-router.j2
       dest: configs/{{ inventory_hostname }}-config.txt
       backup: yes
     tags: build-4500
+
+#  - name: Test Command
+#    ios_command:
+#      commands:
+#        - show cdp neighbor
+#    register: show_test
+ 
+#  - name: Display contents of debug variable
+#    debug:
+#      msg: "{{ show_test.stdout }}" 

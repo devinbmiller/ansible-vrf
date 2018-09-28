@@ -8,7 +8,7 @@ access_enable_secret: "{{ vault_access_enable_secret }}"
 distro_enable_secret: "{{ vault_distro_enable_secret }}"
 
 # This is for Ansible network_cli connections
-#ansible_connection: network_cli
+ansible_connection: network_cli
 ansible_network_os: "{{ os }}"
 ansible_user: "{{ vault_username }}"
 ansible_ssh_pass: "{{ vault_password }}"

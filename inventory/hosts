@@ -1,7 +1,7 @@
 # NOTE: Each host should end in either a 1 or 2 to identify it as router1 or router2
 [4500-routers]
-A1106-DST-4K1
-A1106-DST-4K2
+distro1 ansible_host=10.110.255.1
+distro2 ansible_host=10.110.255.2
 
 [core-routers]
 # NOTE One host should have 'TX' in its name and the other 'OPS'
