@@ -21,4 +21,4 @@
 
   - name: Display contents of debug variable
     debug:
-      msg: "{{ show_test.stdout }}"
+      msg: "{{ fact_results.stdout }}"
