@@ -5,9 +5,20 @@
 
   tasks:
 
+  - name: Gather Cisco IOS Facts
+    ios_facts:
+      gather_subset:
+        - hardware
+        - interfaces
+    register: facts_results
+
   - name: BUILD 2911 Router Configuration
     template:
       src: templates/2911-router-base.j2
       dest: configs/{{ inventory_hostname }}-config.txt
       backup: yes
     tags: build-2911
+
+  - name: Display contents of debug variable
+    debug:
+      msg: "{{ show_test.stdout }}"
