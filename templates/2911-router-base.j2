@@ -3,7 +3,6 @@ vrf definition {{ vrf_name }}
  exit-address-family
 !
 !
-
 {% if groups['2911-routers'] | length > 1 %}
   {%- include "2911-dual.j2" %}
 {% else %}
