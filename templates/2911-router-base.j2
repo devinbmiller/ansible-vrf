@@ -11,11 +11,7 @@ vrf definition {{ vrf_name }}
 !
 !
 router ospf {{vrf_vlan}} vrf {{ vrf_name }}
- {% if inventory_hostname == 'router1' -%}
- router-id {{ vrf_lan.interface_1.ip }}
- {% else -%}
- router-id {{ vrf_lan.interface_2.ip }}
- {% endif -%}
+ router-id {{ ansible_net_interfaces.Loopback0.ipv4[0].address }}
  auto-cost reference-bandwidth 100000
  capability vrf-lite
 {% for item in ospf.networks %}
