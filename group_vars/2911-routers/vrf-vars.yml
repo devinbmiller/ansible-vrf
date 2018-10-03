@@ -23,6 +23,10 @@ vrf_lan:
   fhrp_type: "glbp"
   fhrp_group: "780"
   fhrp_gw_ip: "172.16.0.1"
+  ip_helpers:
+    - 10.200.112.125
+    - 10.200.123.26
+    - 10.3.112.126
 
 # Transport Uplink Variables
 transports:
