@@ -19,7 +19,7 @@ interface {{ vrf_lan.interface_1.name }}.{{ vrf_vlan }}
  vrf forwarding {{ vrf_name }}
  ip address {{ vrf_lan.interface_1.ip }} {{ vrf_lan.mask }}
 {% for helper in vrf_lan.ip_helpers %}
- {{ helper }}
+ ip helper-address {{ helper }}
 {% endfor %}
  ip pim sparse-mode
  {{ vrf_lan.fhrp_type }} {{ vrf_lan.fhrp_group }} ip {{ vrf_lan.fhrp_gw_ip }}
@@ -45,7 +45,7 @@ interface {{ vrf_lan.interface_2.name }}.{{ vrf_vlan }}
  vrf forwarding {{ vrf_name }}
  ip address {{ vrf_lan.interface_2.ip }} {{ vrf_lan.mask }}
 {% for helper in vrf_lan.ip_helpers %}
- {{ helper }}
+ ip helper-address {{ helper }}
 {% endfor %}
  ip pim sparse-mode
  {{ vrf_lan.fhrp_type }} {{ vrf_lan.fhrp_group }} ip {{ vrf_lan.fhrp_gw_ip }}
