@@ -16,7 +16,7 @@
     template:
       src: templates/2911-router-base.j2
       dest: configs/{{ ansible_net_hostname }}-{{vrf_name }}-config.txt
-      backup: yes
+      #backup: yes
     tags: build-2911
 
   - name: Display contents of debug variable
