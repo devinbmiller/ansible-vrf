@@ -19,7 +19,7 @@ vrf_lan:
   interface_1: { name: "GigabitEthernet0/0/0", ip: "172.16.0.2" }
   interface_2: { name: "GigabitEthernet0/0/0", ip: "172.16.0.3" }    # Used in dual router deployments
   mask: "255.255.255.0"
-  lag_interface: "Port-channel1"  # Normally used in single router deployments to access switch
+  lag_interface: "Port-channel1"  # Normally used in single router deployments to access-switch
   fhrp_type: "glbp"
   fhrp_group: "780"
   fhrp_gw_ip: "172.16.0.1"
@@ -30,8 +30,8 @@ vrf_lan:
 
 # Transport Uplink Variables
 transports:
-  interface_1: { name: "GigabitEthernet0/0", vlan: "1741", ip: "172.0.5.2" }
-  interface_2: { name: "GigabitEthernet0/1", vlan: "1742", ip: "172.0.5.6" }
+  interface_1: { name: "GigabitEthernet0/0", vlan: "1741", ip: "172.0.5.2", man_name: "T0150-MAN-75K1" }
+  interface_2: { name: "GigabitEthernet0/1", vlan: "1742", ip: "172.0.5.6", man_name: "LAC-MAN-75K1" }
   mask: "255.255.255.252"
 
 # OSPF Variables

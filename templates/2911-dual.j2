@@ -7,7 +7,7 @@ interface {{ intra_router.interface_1.name }}.{{ vrf_vlan }}
 !
 !
 interface {{ transports.interface_1.name }}.{{ transports.interface_1.vlan }}
- description L3 TRANSPORT INTERFACE TO MAN {{ vrf_name }}
+ description L3 TRANSPORT INTERFACE TO {{ transports.interface_1.man_name }} {{ vrf_name }}
  encapsulation dot1Q {{ transports.interface_1.vlan }}
  vrf forwarding {{ vrf_name }}
  ip address {{ transports.interface_1.ip }} {{ transports.mask }}
@@ -33,7 +33,7 @@ interface {{ intra_router.interface_2.name }}.{{ vrf_vlan }}
 !
 !
 interface {{ transports.interface_2.name }}.{{ transports.interface_2.vlan }}
- description L3 TRANSPORT INTERFACE TO MAN {{ vrf_name }}
+ description L3 TRANSPORT INTERFACE TO {{ transports.interface_2.man_name }} {{ vrf_name }}
  encapsulation dot1Q {{ transports.interface_2.vlan }}
  vrf forwarding {{ vrf_name }}
  ip address {{ transports.interface_2.ip }} {{ transports.mask }}
