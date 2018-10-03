@@ -2,7 +2,7 @@
 # This file contains variables that should be shared across 2911 Routers 
 
 # Are there two routers True/False?
-dual_routers: False
+#dual_routers: False
 
 # Basic VRF variables
 vrf_name: "guestVRF"
