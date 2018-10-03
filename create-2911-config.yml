@@ -15,7 +15,7 @@
   - name: BUILD 2911 Router Configuration
     template:
       src: templates/2911-router-base.j2
-      dest: configs/{{ inventory_hostname }}-config.txt
+      dest: configs/{{ ansible_net_hostname }}-config.txt
       backup: yes
     tags: build-2911
 
