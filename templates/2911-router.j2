@@ -1,4 +1,10 @@
-{% if inventory_hostname == "router1" %}
+vrf definition {{ vrf_name }}
+ address-family ipv4
+ exit-address-family
+!
+!
+{% if groups['2911-routers'] | length > 1 and inventory_hostname == 'router1' %}
+{# THIS SHOULD EVALUATE TO A DUAL ROUTER CONFIGURATION FOR ROUTER1 #}
 interface {{ intra_router.interface_1.name }}.{{ vrf_vlan }}
  description {{ vrf_name }} INTRA-ROUTER L3 TRANSPORT TO {{ intra_router.interface_1.peer }}
  encapsulation dot1Q {{ vrf_vlan }}
@@ -23,8 +29,9 @@ interface {{ vrf_lan.interface_1.name }}.{{ vrf_vlan }}
 {% endfor %}
  ip pim sparse-mode
  {{ vrf_lan.fhrp_type }} {{ vrf_lan.fhrp_group }} ip {{ vrf_lan.fhrp_gw_ip }}
- {{ vrf_lan.fhrp_type }} {{ vrf_lan.fhrp_group }} timers 1 3
-{% else %}
+ {{ vrf_lan.fhrp_type }} {{ vrf_lan.fhrp_group }} timers 1 3  
+{% elif groups['2911-routers'] | length > 1 and inventory_hostname == 'router2' %}
+{# THIS SHOULD EVALUATE TO A DUAL ROUTER CONFIGURATION FOR ROUTER2 #}
 interface {{ intra_router.interface_2.name }}.{{ vrf_vlan }}
  description {{ vrf_name }} INTRA-ROUTER L3 TRANSPORT TO {{ intra_router.interface_2.peer }}
  encapsulation dot1Q {{ vrf_vlan }}
@@ -50,4 +57,46 @@ interface {{ vrf_lan.interface_2.name }}.{{ vrf_vlan }}
  ip pim sparse-mode
  {{ vrf_lan.fhrp_type }} {{ vrf_lan.fhrp_group }} ip {{ vrf_lan.fhrp_gw_ip }}
  {{ vrf_lan.fhrp_type }} {{ vrf_lan.fhrp_group }} timers 1 3
+{% else %}
+{# THIS SHOULD EVALUATE TO A SINGLE ROUTER CONFIGURATION #}
+interface {{ transports.interface_1.name }}.{{ transports.interface_1.vlan }}
+ description L3 TRANSPORT INTERFACE TO {{ transports.interface_1.man_name }} {{ vrf_name }}
+ encapsulation dot1Q {{ transports.interface_1.vlan }}
+ vrf forwarding {{ vrf_name }}
+ ip address {{ transports.interface_1.ip }} {{ transports.mask }}
+!
+interface {{ transports.interface_2.name }}.{{ transports.interface_2.vlan }}
+ description L3 TRANSPORT INTERFACE TO {{ transports.interface_2.man_name }} {{ vrf_name }}
+ encapsulation dot1Q {{ transports.interface_2.vlan }}
+ vrf forwarding {{ vrf_name }}
+ ip address {{ transports.interface_2.ip }} {{ transports.mask }}
+!
+!
+interface {{ vrf_lan.lag_interface }}.{{ vrf_vlan }}
+ description L3 LAN INTERFACE {{ vrf_name }}
+ encapsulation dot1Q {{ vrf_vlan }}
+ vrf forwarding {{ vrf_name }}
+ ip address {{ vrf_lan.interface_1.ip }} {{ vrf_lan.mask }}
+{% for helper in vrf_lan.ip_helpers %}
+ ip helper-address {{ helper }}
+{% endfor %}
+ ip pim sparse-mode
+ {{ vrf_lan.fhrp_type }} {{ vrf_lan.fhrp_group }} ip {{ vrf_lan.fhrp_gw_ip }}
+ {{ vrf_lan.fhrp_type }} {{ vrf_lan.fhrp_group }} timers 1 3
 {% endif %}
+!
+!
+router ospf {{vrf_vlan}} vrf {{ vrf_name }}
+{% if inventory_hostname[-1] == "1" %}
+ router-id {{ vrf_lan.interface_1.ip }}
+{% else %}
+ router-id {{ vrf_lan.interface_2.ip }}
+{% endif %}
+ auto-cost reference-bandwidth 100000
+ capability vrf-lite
+{% for item in ospf.networks %}
+ network {{ item.network }} {{ item.wildcard_mask }} area {{ item.area }}
+{% endfor %}
+!
+!
+end
