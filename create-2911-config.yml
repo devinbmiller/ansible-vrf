@@ -19,6 +19,6 @@
       #backup: yes
     tags: build-2911
 
-  - name: Display contents of debug variable
-    debug:
-      msg: "{{ facts_results }}"
+#  - name: Display contents of debug variable
+#    debug:
+#      msg: "{{ facts_results }}"
