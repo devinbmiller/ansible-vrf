@@ -14,7 +14,7 @@ OPS-COR-7K1
 [2911-routers]
 # DO NOT CHANGE THESE NAMES
 # You may comment out router2 in single router delpoyment to prevent its config from being generated
-router1 = ansible_host=10.251.255.84
+router1 = ansible_host=10.251.255.75
 #router2 = ansible_host=10.251.255.85
 
 [ios:children]
