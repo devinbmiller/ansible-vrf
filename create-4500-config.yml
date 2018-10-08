@@ -17,7 +17,7 @@
     template:
       src: templates/4500-router.j2
       dest: configs/{{ ansible_net_hostname }}-{{ vrf.name }}-config.txt
-      backup: yes
+      #backup: yes
     tags: build-4500
 
 #  - name: Test Command

@@ -1,56 +1,57 @@
-{% for vrf in vrfs %}
 vrf definition {{ vrf.name }}
  !
  address-family ipv4
  exit-address-family
 !
 !
-{% for vlan in vrf.vlans %}
-vlan {{ vlan.id }}
- name {{ vlan.name }}
+vlan {{ vrf.vlan }}
+ name {{ vrf.name }}
+vlan {{ vrf_trans1.vlan }}
+ name {{ vrf_trans1.name }}
+vlan {{ vrf_trans2.vlan }}
+ name {{ vrf_trans2.name }}
 !
-{% endfor %}
 !
 {% if inventory_hostname[-1] == "1" %}
-spanning-tree vlan {{ vrf.routers.lag.vlan }} priority 24576
+spanning-tree vlan {{ vrf.vlan }} priority 24576
 !
 {% else %}
-spanning-tree vlan {{ vrf.routers.lag.vlan }} priority 28672
+spanning-tree vlan {{ vrf.vlan }} priority 28672
 {% endif -%} 
 !
-interface {{ vrf.routers.trans_1.name }}
- switchport trunk allowed vlan add {{ vrf.routers.trans_1.vlan }}
+interface {{ L3.trans1.name }}
+ switchport trunk allowed vlan add {{ vrf_trans1.vlan }}
 !
-interface {{ vrf.routers.trans_2.name }}
- switchport trunk allowed vlan add {{ vrf.routers.trans_2.vlan }}
+interface {{ L3.trans2.name }}
+ switchport trunk allowed vlan add {{ vrf_trans2.vlan }}
 !
-interface {{ vrf.routers.lag.name }}
- switchport trunk allowed vlan add {{ vrf.routers.lag.vlan }}
+interface {{ lag_interface.name }}
+ switchport trunk allowed vlan add {{ vrf.vlan }}
 !
-{% for range in vrf.routers.access_downlinks.ranges %}
+{% for range in access_downlinks.ranges %}
 interface range {{ range }}
- switchport trunk allowed vlan add {{ vrf.routers.lag.vlan }}
+ switchport trunk allowed vlan add {{ vrf.vlan }}
 {% endfor %}
 !
-{% for interface in vrf.routers.access_downlinks.interfaces %}
+{% for interface in access_downlinks.interfaces %}
 interface {{ interface }}
- switchport trunk allowed vlan add {{ vrf.routers.lag.vlan }}
+ switchport trunk allowed vlan add {{ vrf.vlan }}
 {% endfor %}
 !
-!
-interface Vlan{{ vrf.routers.trans_1.vlan }}
- description {{ vrf.name }} {{ vrf.routers.trans_1.description }}
+interface Vlan{{ vrf_trans1.vlan }}
+ description {{ vrf_trans1.name }}
  vrf forwarding {{ vrf.name }}
  {% if inventory_hostname[-1] == "1" -%}
- ip address {{ vrf.routers.trans_1.r1_ip }} {{ vrf.routers.trans_1.mask }}
+ ip address {{ L3.trans1.router1_ip }} {{ L3.trans_mask }}
  {% else -%}
- ip address {{ vrf.routers.trans_1.r2_ip }} {{ vrf.routers.trans_1.mask }}
+ ip address {{ L3.trans1.router2_ip }} {{ L3.trans_mask }}
  {% endif -%}
  no ip redirects
  ip pim sparse-mode
- ip ospf {{ vrf.routers.lag.vlan }} area {{ vrf.routers.trans_1.ospf_area }}
+ ip ospf {{ vrf.vlan }} area 0
  no shutdown
 !
+{#
 interface Vlan{{ vrf.routers.trans_2.vlan }}
  description {{ vrf.name }} {{ vrf.routers.trans_2.description }}
  vrf forwarding {{ vrf.name }}
@@ -103,5 +104,5 @@ router ospf {{ vrf.routers.lag.vlan }} vrf {{ vrf.name }}
 !
 !
 !
-{% endfor %}
+#}
 end

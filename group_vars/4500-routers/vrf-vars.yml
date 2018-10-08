@@ -65,7 +65,6 @@ vrf_trans2:
   name: "OPS-COR {{ vrf.name }} Transport"
 lag_interface:  # L2 interface between two 4500 routers
   name: Port-channel1
-  desc: "{{ vrf.name }} Network"
 
 # Layer 3 Variables
 L3:
@@ -79,14 +78,15 @@ L3:
     type: hsrp
     ip: 10.174.68.1
     group: 1740
-  transport_1:
+  trans1:
     name: TenGigabitEthernet1/3
     router1_ip: 10.175.254.238
     router2_ip: 10.175.255.74
-  transport_2:
+  trans2:
     name: TenGigabitEthernet1/4
     router1_ip: 10.175.255.70
     router2_ip: 10.175.254.230
+  trans_mask: 255.255.255.252
 
 # Routing Variables. Specifically, OSPF
 ospf_area: 17468
@@ -96,6 +96,5 @@ ospf_network: 10.174.68.0
 access_downlinks:
   ranges:
     - "TenGigabitEthernet1/6 - 13"
-  # Uncomment below if you need to add individual interfaces
-  interfaces:
-    #- "TenGigabitEthernet1/14"
+  # Add individual interfaces to list below if you need to add individual interfaces example. [TenGigabitEthernet1/6, TenGigabitEthernet1/11]
+  interfaces: []    
