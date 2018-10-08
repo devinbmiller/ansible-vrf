@@ -10,7 +10,7 @@
     ios_facts:
       gather_subset:
         - hardware
-      #  - interfaces
+        - interfaces
     register: facts_results
 
   - name: Build 4500 Router Configurations
