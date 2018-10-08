@@ -16,7 +16,7 @@
   - name: Build 4500 Router Configurations
     template:
       src: templates/4500-router.j2
-      dest: configs/{{ ansible_net_hostname }}-{{ vrf_name }}-config.txt
+      dest: configs/{{ ansible_net_hostname }}-{{ vrf.name }}-config.txt
       backup: yes
     tags: build-4500
 

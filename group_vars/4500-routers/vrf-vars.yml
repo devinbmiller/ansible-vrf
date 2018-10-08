@@ -54,11 +54,12 @@ vrfs:
           - "TenGigabitEthernet1/14"
 
 # Basic VRF Variables
-vrf_name: guest_vrf
-vrf_vlan: 1740
+vrf:
+  name: guest_vrf
+  vlan: 1740
 vrf_trans1:
   vlan: 1741
-  name: "TX-COR {{ vrf_name }} Transport"
+  name: "TX-COR {{ vrf.name }} Transport"
 vrf_trans2:
   vlan: 1742
-  name: "OPS-COR {{ vrf_name }} Transport"
+  name: "OPS-COR {{ vrf.name }} Transport"
