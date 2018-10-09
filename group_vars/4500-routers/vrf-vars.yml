@@ -1,58 +1,4 @@
 ---
-
-vrfs:
-  - name: "guestVRF"
-    vlans:
-      - id: 1740
-        name: "guestVRF"
-      - id: 1741 
-        name: "TX-COR Transport guestVRF"
-      - id: 1742
-        name: "OPS-COR Transport guestVRF"
-    routers:
-      lag:
-        name: "Port-channel1"
-        description: "LAN Network"
-        vlan: 1740
-        r1_ip: 10.174.68.2
-        r2_ip: 10.174.68.3
-        mask: 255.255.252.0
-        helpers:
-          -  10.200.123.80
-          -  10.3.122.23
-        fhrp_type: HSRP     # Choose HSRP or GLBP and edit corresponding variables below
-        hsrp:
-          group: 1740 
-          gw_ip: 10.174.68.1
-        glbp:
-          group: 1740
-          gw_ip: 10.174.68.1
-        ospf_area: 17468
-      trans_1:
-        name: TenGigabitEthernet1/3
-        description: "Taxi-Core Transport"
-        vlan: 1741
-        r1_ip: 10.175.254.238
-        r2_ip: 10.175.255.74
-        mask: 255.255.255.252
-        ospf_area: 0
-      trans_2:
-        name: TenGigabitEthernet1/4
-        description: "OPS-Core Transport"
-        vlan: 1742
-        r1_ip: 10.175.255.70
-        r2_ip: 10.175.254.230
-        mask: 255.255.255.252
-        ospf_area: 0
-      routing:
-        ospf:
-          network: 10.174.68.0
-      access_downlinks:
-        ranges:
-          - "TenGigabitEthernet1/6 - 13"
-        interfaces:
-          - "TenGigabitEthernet1/14"
-
 # Basic VRF Variables
 vrf:
   name: guest_vrf
@@ -96,5 +42,6 @@ ospf_network: 10.174.68.0
 access_downlinks:
   ranges:
     - "TenGigabitEthernet1/6 - 13"
-  # Add individual interfaces to list below if you need to add individual interfaces example. [TenGigabitEthernet1/6, TenGigabitEthernet1/11]
+  # Add individual interfaces to list below if you need to add individual interfaces 
+  # Example: [TenGigabitEthernet1/6, TenGigabitEthernet1/11]
   interfaces: []    

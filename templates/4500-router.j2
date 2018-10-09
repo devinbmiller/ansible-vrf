@@ -64,45 +64,43 @@ interface Vlan{{ vrf_trans2.vlan }}
  ip ospf {{ vrf.vlan }} area 0
  no shutdown
 !
-{#
-interface Vlan{{ vrf.routers.lag.vlan }}
- description {{ vrf.name }} {{ vrf.routers.lag.description }}
+interface Vlan{{ vrf.vlan }}
+ description {{ vrf.name }} Network
  vrf forwarding {{ vrf.name }}
  {% if inventory_hostname[-1] == "1" -%}
- ip address {{ vrf.routers.lag.r1_ip }} {{ vrf.routers.lag.mask }}
+ ip address {{ L3.router1_ip }} {{ L3.mask }}
  {% else -%}
- ip address {{ vrf.routers.lag.r2_ip }} {{ vrf.routers.lag.mask }}
+ ip address {{ L3.router2_ip }} {{ L3.mask }}
  {% endif -%}
- {%- for ip in vrf.routers.lag.helpers -%}
+ {%- for ip in L3.helpers -%}
  ip helper-address {{ ip }}
  {% endfor -%}
- {% if vrf.routers.lag.fhrp_type.upper() == "HSRP" -%}
+ {% if L3.fhrp.type.upper() == "HSRP" -%}
  standby version 2
- standby {{ vrf.routers.lag.hsrp.group }} ip {{ vrf.routers.lag.hsrp.gw_ip }}
- standby {{ vrf.routers.lag.hsrp.group }} timers 1 3
+ standby {{ L3.fhrp.group }} ip {{ L3.fhrp.ip }}
+ standby {{ L3.fhrp.group }} timers 1 3
  {% endif -%}
  {% if inventory_hostname[-1] == "1" -%}
- standby {{ vrf.routers.lag.hsrp.group }} priority 110
- standby {{ vrf.routers.lag.hsrp.group }} preempt
+ standby {{ L3.fhrp.group }} priority 110
+ standby {{ L3.fhrp.group }} preempt
  {% endif -%}
  no ip redirects
  ip pim sparse-mode
- ip ospf {{ vrf.routers.lag.vlan }} area {{ vrf.routers.lag.ospf_area }}
+ ip ospf {{ vrf.vlan }} area {{ ospf_area }}
  no shutdown
 !
 !
-router ospf {{ vrf.routers.lag.vlan }} vrf {{ vrf.name }}
+router ospf {{ vrf.vlan }} vrf {{ vrf.name }}
  {% if inventory_hostname[-1] == "1" -%}
- router-id {{ vrf.routers.lag.r1_ip }}
+ router-id {{ L3.router1_ip }}
  {% else -%}
- router-id {{ vrf.routers.lag.r2_ip }}
+ router-id {{ L3.router2_ip }}
  {% endif -%}
  auto-cost reference-bandwidth 100000
  capability vrf-lite
- area {{ vrf.routers.lag.ospf_area }} range {{ vrf.routers.routing.ospf.network }} {{ vrf.routers.lag.mask }}
+ area {{ ospf_area }} range {{ ospf_network }} {{ L3.mask }}
 !
 !
 !
 !
-#}
 end
