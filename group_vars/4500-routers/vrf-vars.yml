@@ -18,8 +18,12 @@ L3:
   router2_ip: 10.174.68.3
   mask: 255.255.252.0
   helpers:
+    # The following are guest helper addresses comment-out for other VRFs
     -  10.200.123.80
     -  10.3.122.23
+    # The following are non-guest helpers uncomment as needed
+    #-  10.200.112.125
+    #-  10.3.112.126
   fhrp:
     type: hsrp
     ip: 10.174.68.1
